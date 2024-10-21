@@ -24,9 +24,8 @@ class _MyCoolGameState extends State<MyCoolGame> {
     ),
   );
 
-  void _onReady(BonfireGameInterface i) {
-    debugPrint('My Cool Game is ready.');
-  }
+  void _onReady(BonfireGameInterface i) =>
+      debugPrint('"My Cool Game" is now ready. 👍🏾');
 
   @override
   Widget build(BuildContext context) => BonfireWidget(

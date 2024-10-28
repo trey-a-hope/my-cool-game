@@ -5,6 +5,14 @@ import 'package:my_cool_game/npcs/alchemist.dart';
 import 'package:my_cool_game/npcs/blacksmith.dart';
 import 'package:my_cool_game/players/dwarf_warrior.dart';
 
+// 1. Forces
+// 2. Collisions
+// 3. Joystick & Movement
+// 4. Jump
+// 5. Action Buttons
+// 6. MouseEventListener
+// 7. Screen Boundary Check
+
 class MyCoolGame extends StatefulWidget {
   const MyCoolGame({super.key});
 

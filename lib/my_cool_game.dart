@@ -9,9 +9,10 @@ import 'package:my_cool_game/players/dwarf_warrior.dart';
 // 2. Collisions
 // 3. Joystick & Movement
 // 4. Jump
-// 5. Action Buttons
-// 6. MouseEventListener
-// 7. Screen Boundary Check
+// 5. Pause
+// 6. Action Buttons
+// 7. MouseEventListener
+// 8. Screen Boundary Check
 
 class MyCoolGame extends StatefulWidget {
   const MyCoolGame({super.key});

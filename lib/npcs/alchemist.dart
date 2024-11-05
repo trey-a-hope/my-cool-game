@@ -8,8 +8,8 @@ class Alchemist extends SimpleNpc {
       : super(
           size: Vector2.all(Globals.tileSize),
           animation: SimpleDirectionAnimation(
-            idleRight: SpriteAnimations.alchemist,
-            runRight: SpriteAnimations.alchemist,
+            idleRight: SpriteAnimations.alchemist.idle,
+            runRight: SpriteAnimations.alchemist.idle,
           ),
         );
 

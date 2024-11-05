@@ -23,8 +23,8 @@ class DwarfWarrior extends PlatformPlayer
           countJumps: 2,
           size: Vector2.all(_size),
           animation: PlatformAnimations(
-            idleRight: SpriteAnimations.dwarfWarriorIdle,
-            runRight: SpriteAnimations.dwarfWarriorWalk,
+            idleRight: SpriteAnimations.dwarfWarrior.idle,
+            runRight: SpriteAnimations.dwarfWarrior.walk,
           ),
         ) {
     addForce(Globals.forces.gravity);

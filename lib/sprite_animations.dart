@@ -4,50 +4,50 @@ import 'package:my_cool_game/globals.dart';
 class SpriteAnimations {
   SpriteAnimations._();
 
-  static const _dwarfWarriorIdle = 'dwarf_warrior/idle';
-  static const _dwarfWarriorWalk = 'dwarf_warrior/walk';
-  static const _alchemist = 'alchemist';
-  static const _blacksmith = 'blacksmith';
+  static final alchemist = _Alchemist();
+  static final blacksmith = _Blacksmith();
+  static final dwarfWarrior = _DwarfWarrior();
+}
 
-  static const _dwarfWarriorIdleCount = 3;
-  static const _dwarfWarriorWalkCount = 6;
-  static const _alchemistCount = 8;
-  static const _blacksmithCount = 7;
+class _Alchemist {
+  Future<SpriteAnimation> get idle async => _spriteAnimation(
+        count: 8,
+        path: 'alchemist',
+      );
+}
 
-  static Future<SpriteAnimation> get blacksmith async => _spriteAnimation(
-        count: _blacksmithCount,
-        path: _blacksmith,
+class _Blacksmith {
+  Future<SpriteAnimation> get idle async => _spriteAnimation(
+        count: 7,
+        path: 'blacksmith',
+      );
+}
+
+class _DwarfWarrior {
+  Future<SpriteAnimation> get idle async => _spriteAnimation(
+        count: 3,
+        path: 'dwarf_warrior/idle',
       );
 
-  static Future<SpriteAnimation> get alchemist async => _spriteAnimation(
-        count: _alchemistCount,
-        path: _alchemist,
+  Future<SpriteAnimation> get walk async => _spriteAnimation(
+        count: 6,
+        path: 'dwarf_warrior/walk',
       );
+}
 
-  static Future<SpriteAnimation> get dwarfWarriorIdle async => _spriteAnimation(
-        count: _dwarfWarriorIdleCount,
-        path: _dwarfWarriorIdle,
-      );
+Future<SpriteAnimation> _spriteAnimation({
+  required int count,
+  required String path,
+}) async {
+  final sprites = <Sprite>[];
 
-  static Future<SpriteAnimation> get dwarfWarriorWalk async => _spriteAnimation(
-        count: _dwarfWarriorWalkCount,
-        path: _dwarfWarriorWalk,
-      );
-
-  static Future<SpriteAnimation> _spriteAnimation({
-    required int count,
-    required String path,
-  }) async {
-    final sprites = <Sprite>[];
-
-    for (int i = 0; i < count; i++) {
-      final sprite = await Sprite.load('$path/$i.png');
-      sprites.add(sprite);
-    }
-
-    return SpriteAnimation.spriteList(
-      sprites,
-      stepTime: Globals.spriteStepTime,
-    );
+  for (int i = 0; i < count; i++) {
+    final sprite = await Sprite.load('$path/$i.png');
+    sprites.add(sprite);
   }
+
+  return SpriteAnimation.spriteList(
+    sprites,
+    stepTime: Globals.spriteStepTime,
+  );
 }

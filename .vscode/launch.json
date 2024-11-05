@@ -1,20 +1,20 @@
 {
     "version": "0.2.0",
     "configurations": [
-        {
-            "name": "Flutter Web Debug with Assertions",
-            "request": "launch",
-            "type": "dart",
-            "args": [
-                "--web-renderer",
-                "canvaskit",
-                "--dart-define=ASSERTIONS=true"
-            ],
-            "flutterMode": "debug",
-            "additionalArgs": [
-                "--web-browser-flag=--enable-features=PlatformAssertions",
-                "--web-enable-expression-evaluation"
-            ]
-        }
+      {
+        "name": "Flutter Web Debug with Assertions",
+        "request": "launch",
+        "type": "dart",
+        "args": [
+          "--web-renderer",
+          "canvaskit",
+          "--dart-define=ASSERTIONS=true"
+        ],
+        "flutterMode": "debug",
+        "additionalArgs": [
+          "--web-browser-flag=--enable-features=PlatformAssertions",
+          "--web-enable-expression-evaluation"
+        ]
+      }
     ]
-}
+  }

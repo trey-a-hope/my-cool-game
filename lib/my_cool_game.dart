@@ -1,17 +1,11 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_cool_game/enums/joystick_actions.dart';
 import 'package:my_cool_game/globals.dart';
 import 'package:my_cool_game/npcs/alchemist.dart';
 import 'package:my_cool_game/npcs/blacksmith.dart';
 import 'package:my_cool_game/players/dwarf_warrior.dart';
-
-enum JoystickActions {
-  buttonA,
-  buttonB,
-  buttonX,
-  buttonY,
-}
 
 class MyCoolGame extends StatefulWidget {
   const MyCoolGame({super.key});

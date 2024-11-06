@@ -2,6 +2,8 @@ import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_cool_game/enums/joystick_actions.dart';
+import 'package:my_cool_game/enums/platform_animations_other.dart';
+import 'package:my_cool_game/extensions/direction_animation_extensions.dart';
 import 'package:my_cool_game/extensions/vector2_extensions.dart';
 import 'package:my_cool_game/globals.dart';
 import 'package:my_cool_game/mixins/screen_boundary_checker.dart';
@@ -10,10 +12,12 @@ import 'package:my_cool_game/sprite_animations.dart';
 import 'package:toastification/toastification.dart';
 
 class DwarfWarrior extends PlatformPlayer
-    with HandleForces, MouseEventListener, ScreenBoundaryChecker {
+    with HandleForces, MouseEventListener, ScreenBoundaryChecker, UseLifeBar {
   static const _size = Globals.tileSize * 1.5;
 
   final void Function() toggleDevMode;
+
+  bool _canAttack = true;
 
   DwarfWarrior({
     required super.position,
@@ -25,9 +29,23 @@ class DwarfWarrior extends PlatformPlayer
           animation: PlatformAnimations(
             idleRight: SpriteAnimations.dwarfWarrior.idle,
             runRight: SpriteAnimations.dwarfWarrior.walk,
+            others: {
+              PlatformAnimationsOther.attackOne.name:
+                  SpriteAnimations.dwarfWarrior.attack,
+              PlatformAnimationsOther.hurt.name:
+                  SpriteAnimations.dwarfWarrior.hurt,
+              PlatformAnimationsOther.death.name:
+                  SpriteAnimations.dwarfWarrior.death,
+            },
           ),
         ) {
     addForce(Globals.forces.gravity);
+
+    setupLifeBar(
+      borderRadius: BorderRadius.circular(2),
+      borderWidth: 2,
+      showLifeText: false,
+    );
   }
 
   @override
@@ -79,10 +97,44 @@ class DwarfWarrior extends PlatformPlayer
 
   void _aAction() => jump();
 
-  void _bAction() => ModalService.showToast(
-        title: 'B Action Called...',
-        type: ToastificationType.warning,
+  void _bAction() {
+    if (_canAttack) {
+      playOnceOther(
+        other: PlatformAnimationsOther.attackOne,
+        onStart: () => _canAttack = false,
+        onFinish: () => _canAttack = true,
       );
+
+      simpleAttackMelee(
+        damage: 10,
+        size: size,
+      );
+    }
+  }
+
+  @override
+  void onDie() {
+    playOnceOther(
+      other: PlatformAnimationsOther.death,
+      onFinish: () => removeFromParent(),
+    );
+    super.onDie();
+  }
+
+  @override
+  void onReceiveDamage(
+    AttackOriginEnum attacker,
+    double damage,
+    identify,
+  ) {
+    if (damage < life) {
+      playOnceOther(
+        other: PlatformAnimationsOther.hurt,
+      );
+    }
+
+    super.onReceiveDamage(attacker, damage, identify);
+  }
 
   void _xAction() => ModalService.showToast(
         title: 'X Action Called...',

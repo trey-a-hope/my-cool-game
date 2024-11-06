@@ -1,6 +1,9 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_cool_game/enemies/headless_horseman.dart';
+import 'package:my_cool_game/enemies/lizardman.dart';
+import 'package:my_cool_game/enemies/minotaur.dart';
 import 'package:my_cool_game/enums/joystick_actions.dart';
 import 'package:my_cool_game/globals.dart';
 import 'package:my_cool_game/npcs/alchemist.dart';
@@ -51,18 +54,6 @@ class _MyCoolGameState extends State<MyCoolGame> {
 
   bool _devMode = false;
   Key _gameKey = GlobalKey();
-
-  /* 
-    1. Add Enemies to Sprite Map.
-    2. Add Animations for Dwarf Warrior.
-    3. Create LizardMan as Enemy.
-    4. Add Life Bars to Player & Enemy.
-    5. Apply Melee Attack for Dwarf Warrior.
-    6. Modify How The Lizardman Receives Damage.
-    7. Apply Melee Attack for Lizardman.
-    8. Modify How The Dwarf Warrior Receives Damage.
-    9. Duplicate the Lizardman for the Minotuar and the Headless Horseman.
-  */
 
   @override
   Widget build(BuildContext context) => BonfireWidget(
@@ -134,6 +125,15 @@ class _MyCoolGameState extends State<MyCoolGame> {
                   position: properties,
                 ),
             'Blacksmith': (properties) => Blacksmith(
+                  position: properties,
+                ),
+            'Lizardman': (properties) => Lizardman(
+                  position: properties,
+                ),
+            'Minotaur': (properties) => Minotaur(
+                  position: properties,
+                ),
+            'Headless Horseman': (properties) => HeadlessHorseman(
                   position: properties,
                 ),
           },

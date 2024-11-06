@@ -1,12 +1,12 @@
 name: my_cool_game
 description: "A new Flutter project."
 
-publish_to: 'none' 
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.4.4 <4.0.0'
+  sdk: ">=3.4.4 <4.0.0"
 
 dependencies:
   flutter:
@@ -23,13 +23,45 @@ dev_dependencies:
   flutter_lints: ^3.0.0
 
 flutter:
-
   uses-material-design: true
 
   assets:
     - assets/images/
+
+    # Dwarf Warrior
     - assets/images/dwarf_warrior/idle/
     - assets/images/dwarf_warrior/walk/
+    - assets/images/dwarf_warrior/attack/
+    - assets/images/dwarf_warrior/hurt/
+    - assets/images/dwarf_warrior/death/
+
+    # Lizardman
+    - assets/images/lizardman/idle/
+    - assets/images/lizardman/walk/
+    - assets/images/lizardman/attack/
+    - assets/images/lizardman/hurt/
+    - assets/images/lizardman/death/
+
+    # Minotaur
+    - assets/images/minotaur/idle/
+    - assets/images/minotaur/walk/
+    - assets/images/minotaur/attack_one/
+    - assets/images/minotaur/attack_two/
+    - assets/images/minotaur/hurt/
+    - assets/images/minotaur/death/
+
+    # Headless Horseman
+    - assets/images/headless_horseman/idle/
+    - assets/images/headless_horseman/run/
+    - assets/images/headless_horseman/attack/
+    - assets/images/headless_horseman/hurt/
+    - assets/images/headless_horseman/death/
+
+    # Alchemist
     - assets/images/alchemist/
+
+    # Blacksmith
     - assets/images/blacksmith/
+
+    # Input
     - assets/images/input/

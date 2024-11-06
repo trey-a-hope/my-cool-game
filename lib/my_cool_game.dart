@@ -52,6 +52,18 @@ class _MyCoolGameState extends State<MyCoolGame> {
   bool _devMode = false;
   Key _gameKey = GlobalKey();
 
+  /* 
+    1. Add Enemies to Sprite Map.
+    2. Add Animations for Dwarf Warrior.
+    3. Create LizardMan as Enemy.
+    4. Add Life Bars to Player & Enemy.
+    5. Apply Melee Attack for Dwarf Warrior.
+    6. Modify How The Lizardman Receives Damage.
+    7. Apply Melee Attack for Lizardman.
+    8. Modify How The Dwarf Warrior Receives Damage.
+    9. Duplicate the Lizardman for the Minotuar and the Headless Horseman.
+  */
+
   @override
   Widget build(BuildContext context) => BonfireWidget(
         key: _gameKey,

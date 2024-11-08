@@ -2,13 +2,13 @@ import 'dart:math';
 
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
-import 'package:my_cool_game/enums/platform_animations_other.dart';
-import 'package:my_cool_game/extensions/direction_animation_extensions.dart';
-import 'package:my_cool_game/extensions/platform_enemy_extensions.dart';
-import 'package:my_cool_game/extensions/vector2_extensions.dart';
-import 'package:my_cool_game/globals.dart';
-import 'package:my_cool_game/mixins/screen_boundary_checker.dart';
-import 'package:my_cool_game/sprite_animations.dart';
+import 'package:my_cool_game/core/enums/platform_animations_other.dart';
+import 'package:my_cool_game/core/extensions/direction_animation_extensions.dart';
+import 'package:my_cool_game/core/extensions/platform_enemy_extensions.dart';
+import 'package:my_cool_game/core/extensions/vector2_extensions.dart';
+import 'package:my_cool_game/core/globals.dart';
+import 'package:my_cool_game/infrastructure/mixins/screen_boundary_checker.dart';
+import 'package:my_cool_game/presentation/game/sprite_animations.dart';
 
 class Minotaur extends PlatformEnemy
     with HandleForces, ScreenBoundaryChecker, UseLifeBar {

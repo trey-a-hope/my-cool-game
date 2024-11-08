@@ -10,6 +10,7 @@
           "canvaskit",
           "--dart-define=ASSERTIONS=true"
         ],
+        "program": "lib/presentation/main.dart",
         "flutterMode": "debug",
         "additionalArgs": [
           "--web-browser-flag=--enable-features=PlatformAssertions",

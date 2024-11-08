@@ -1,32 +1,32 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
-import 'package:my_cool_game/enums/platform_animations_other.dart';
-import 'package:my_cool_game/extensions/direction_animation_extensions.dart';
-import 'package:my_cool_game/extensions/platform_enemy_extensions.dart';
-import 'package:my_cool_game/extensions/vector2_extensions.dart';
-import 'package:my_cool_game/globals.dart';
-import 'package:my_cool_game/mixins/screen_boundary_checker.dart';
-import 'package:my_cool_game/sprite_animations.dart';
+import 'package:my_cool_game/core/enums/platform_animations_other.dart';
+import 'package:my_cool_game/core/extensions/direction_animation_extensions.dart';
+import 'package:my_cool_game/core/extensions/platform_enemy_extensions.dart';
+import 'package:my_cool_game/core/extensions/vector2_extensions.dart';
+import 'package:my_cool_game/core/globals.dart';
+import 'package:my_cool_game/infrastructure/mixins/screen_boundary_checker.dart';
+import 'package:my_cool_game/presentation/game/sprite_animations.dart';
 
-class Lizardman extends PlatformEnemy
+class HeadlessHorseman extends PlatformEnemy
     with HandleForces, ScreenBoundaryChecker, UseLifeBar {
-  static const _size = Globals.tileSize * 1.5;
+  static const _size = Globals.tileSize * 2;
 
-  Lizardman({
+  HeadlessHorseman({
     required super.position,
   }) : super(
-          life: 50,
+          life: 200,
           size: Vector2.all(_size),
           animation: PlatformAnimations(
-            idleRight: SpriteAnimations.lizardman.idle,
-            runRight: SpriteAnimations.lizardman.walk,
+            idleRight: SpriteAnimations.headlessHorseman.idle,
+            runRight: SpriteAnimations.headlessHorseman.run,
             others: {
               PlatformAnimationsOther.attackOne.name:
-                  SpriteAnimations.lizardman.attack,
+                  SpriteAnimations.headlessHorseman.attack,
               PlatformAnimationsOther.hurt.name:
-                  SpriteAnimations.lizardman.hurt,
+                  SpriteAnimations.headlessHorseman.hurt,
               PlatformAnimationsOther.death.name:
-                  SpriteAnimations.lizardman.death,
+                  SpriteAnimations.headlessHorseman.death,
             },
           ),
         ) {
@@ -53,7 +53,7 @@ class Lizardman extends PlatformEnemy
 
         if (canGiveDamage(player)) {
           simpleAttackMelee(
-            damage: 5,
+            damage: 20,
             size: size,
             execute: () => playOnceOther(
               other: PlatformAnimationsOther.attackOne,

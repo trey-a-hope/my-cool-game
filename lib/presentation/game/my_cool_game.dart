@@ -1,14 +1,14 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_cool_game/enemies/headless_horseman.dart';
-import 'package:my_cool_game/enemies/lizardman.dart';
-import 'package:my_cool_game/enemies/minotaur.dart';
-import 'package:my_cool_game/enums/joystick_actions.dart';
-import 'package:my_cool_game/globals.dart';
-import 'package:my_cool_game/npcs/alchemist.dart';
-import 'package:my_cool_game/npcs/blacksmith.dart';
-import 'package:my_cool_game/players/dwarf_warrior.dart';
+import 'package:my_cool_game/domain/entities/enemies/headless_horseman.dart';
+import 'package:my_cool_game/domain/entities/enemies/lizardman.dart';
+import 'package:my_cool_game/domain/entities/enemies/minotaur.dart';
+import 'package:my_cool_game/core/enums/joystick_actions.dart';
+import 'package:my_cool_game/core/globals.dart';
+import 'package:my_cool_game/domain/entities/npcs/alchemist.dart';
+import 'package:my_cool_game/domain/entities/npcs/blacksmith.dart';
+import 'package:my_cool_game/domain/entities/players/dwarf_warrior.dart';
 
 class MyCoolGame extends StatefulWidget {
   const MyCoolGame({super.key});

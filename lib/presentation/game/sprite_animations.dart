@@ -1,5 +1,5 @@
 import 'package:bonfire/bonfire.dart';
-import 'package:my_cool_game/globals.dart';
+import 'package:my_cool_game/core/globals.dart';
 
 class SpriteAnimations {
   SpriteAnimations._();

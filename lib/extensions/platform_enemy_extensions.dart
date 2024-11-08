@@ -48,8 +48,8 @@ extension PlatformEnemyExtensions on PlatformEnemy {
   }
 
   (Vector2, Vector2) _getAbsoluteCenters(Player player) {
-    final playerHitbox = player.getHitboxes.first;
-    final enemyHitbox = getHitboxes.first;
+    final playerHitbox = player.shapeHitboxes.first;
+    final enemyHitbox = shapeHitboxes.first;
 
     final playerAbsoluteCenter = playerHitbox.absoluteCenter;
     final enemyAbsoluteCenter = enemyHitbox.absoluteCenter;

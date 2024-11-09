@@ -1,4 +1,4 @@
-# Pixel Adventure - RPG/Fantasy Game
+# My Cool Game - RPG/Fantasy Game
 
 A 2D RPG/Fantasy game built with Flutter and Flame engine, featuring pixel art graphics, combat mechanics, and immersive world design. This project follows the comprehensive development approach from "On Fire with Bonfire" game development course.
 
@@ -33,8 +33,7 @@ A 2D RPG/Fantasy game built with Flutter and Flame engine, featuring pixel art g
    - Input handling
    - Collision detection
    - Physics-based interactions
-![Creating Enemies Attacks](https://github.com/user-attachments/assets/eb4d9559-6a90-436c-8ccd-955f177fd4d7)
-
+     
 4. **Combat System**
    - Enemy AI
    - Attack mechanics
@@ -46,26 +45,6 @@ A 2D RPG/Fantasy game built with Flutter and Flame engine, featuring pixel art g
    - Dynamic lighting
    - Interactive objects
    - Environmental effects
-
-## 🏗️ Project Structure
-
-```
-lib/
-├── components/
-│   ├── player/
-│   ├── enemies/
-│   ├── allies/
-│   └── items/
-├── systems/
-│   ├── combat/
-│   ├── inventory/
-│   ├── dialogue/
-│   └── physics/
-├── screens/
-├── utils/
-├── game/
-└── main.dart
-```
 
 ## 🚀 Getting Started
 
@@ -96,24 +75,6 @@ flutter pub get
 ```bash
 flutter run
 ```
-
-## 🎨 Assets
-
-All game assets are stored in the `assets/` directory:
-
-- `images/` - Character sprites, backgrounds, and effects
-- `audio/` - Sound effects and background music
-- `maps/` - Level designs and tilesets
-- `dialogue/` - Story scripts and character dialogues
-
-## 🕹️ Controls
-
-- Arrow keys / WASD - Movement
-- Space - Jump
-- X - Attack
-- E - Interact
-- I - Inventory
-- ESC - Pause menu
 
 ## 📱 Supported Platforms
 

@@ -1,16 +1,13 @@
-# My Cool Game - RPG/Fantasy Game
+# My Cool Game
 
 A 2D RPG/Fantasy game built with Flutter and Flame engine, featuring pixel art graphics, combat mechanics, and immersive world design. This project follows the comprehensive development approach from "On Fire with Bonfire" game development course.
 
 ## 🎮 Features
 
-### Core Mechanics
 - Complete combat system with enemies and attacks
 - Fluid character movement and physics-based interactions
 - Main hero and allies system with rich characterization
 - World design with parallax backgrounds and dynamic lighting
-
-### Advanced Features
 - Item and inventory management
 - Dialogue and storytelling system
 - Comprehensive audio and visual effects
@@ -33,7 +30,7 @@ A 2D RPG/Fantasy game built with Flutter and Flame engine, featuring pixel art g
    - Input handling
    - Collision detection
    - Physics-based interactions
-     
+
 4. **Combat System**
    - Enemy AI
    - Attack mechanics
@@ -58,12 +55,12 @@ A 2D RPG/Fantasy game built with Flutter and Flame engine, featuring pixel art g
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/pixel-adventure.git
+git clone https://github.com/yourusername/my-cool-game.git
 ```
 
 2. Navigate to project directory
 ```bash
-cd pixel-adventure
+cd my-cool-game
 ```
 
 3. Install dependencies
@@ -111,12 +108,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-## 📞 Contact
-
-Your Name - [@yourusername](https://twitter.com/yourusername)
-
-Project Link: [https://github.com/yourusername/pixel-adventure](https://github.com/yourusername/pixel-adventure)
 
 ## ✨ Acknowledgments
 

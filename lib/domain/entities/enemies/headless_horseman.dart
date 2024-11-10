@@ -17,6 +17,7 @@ class HeadlessHorseman extends PlatformEnemy
   }) : super(
           life: 200,
           size: Vector2.all(_size),
+          initDirection: Direction.left,
           animation: PlatformAnimations(
             idleRight: SpriteAnimations.headlessHorseman.idle,
             runRight: SpriteAnimations.headlessHorseman.run,

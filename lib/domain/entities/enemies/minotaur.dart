@@ -19,6 +19,7 @@ class Minotaur extends PlatformEnemy
   }) : super(
           life: 100,
           size: Vector2.all(_size),
+          initDirection: Direction.left,
           animation: PlatformAnimations(
             idleRight: SpriteAnimations.minotaur.idle,
             runRight: SpriteAnimations.minotaur.walk,

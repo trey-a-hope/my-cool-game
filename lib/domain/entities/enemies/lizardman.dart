@@ -17,6 +17,7 @@ class Lizardman extends PlatformEnemy
   }) : super(
           life: 50,
           size: Vector2.all(_size),
+          initDirection: Direction.left,
           animation: PlatformAnimations(
             idleRight: SpriteAnimations.lizardman.idle,
             runRight: SpriteAnimations.lizardman.walk,

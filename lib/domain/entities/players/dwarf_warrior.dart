@@ -1,14 +1,14 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_cool_game/core/enums/joystick_actions.dart';
-import 'package:my_cool_game/core/enums/platform_animations_other.dart';
-import 'package:my_cool_game/core/extensions/direction_animation_extensions.dart';
-import 'package:my_cool_game/core/extensions/vector2_extensions.dart';
-import 'package:my_cool_game/core/globals.dart';
-import 'package:my_cool_game/infrastructure/mixins/screen_boundary_checker.dart';
-import 'package:my_cool_game/infrastructure/services/modal_service.dart';
-import 'package:my_cool_game/presentation/game/sprite_animations.dart';
+import 'package:my_cool_game/domain/core/enums/joystick_actions.dart';
+import 'package:my_cool_game/domain/core/enums/platform_animations_other.dart';
+import 'package:my_cool_game/domain/core/extensions/direction_animation_extensions.dart';
+import 'package:my_cool_game/domain/core/extensions/vector2_extensions.dart';
+import 'package:my_cool_game/domain/core/globals.dart';
+import 'package:my_cool_game/domain/core/mixins/screen_boundary_checker.dart';
+import 'package:my_cool_game/data/services/modal_service.dart';
+import 'package:my_cool_game/presentation/game/animations/sprite_animations.dart';
 import 'package:toastification/toastification.dart';
 
 class DwarfWarrior extends PlatformPlayer

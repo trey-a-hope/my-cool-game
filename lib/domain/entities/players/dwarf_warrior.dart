@@ -8,6 +8,7 @@ import 'package:my_cool_game/domain/core/extensions/vector2_extensions.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
 import 'package:my_cool_game/domain/core/mixins/screen_boundary_checker.dart';
 import 'package:my_cool_game/data/services/modal_service.dart';
+import 'package:my_cool_game/domain/entities/objects/chest.dart';
 import 'package:my_cool_game/presentation/game/animations/sprite_animations.dart';
 import 'package:toastification/toastification.dart';
 
@@ -18,6 +19,8 @@ class DwarfWarrior extends PlatformPlayer
   final void Function() toggleDevMode;
 
   bool _canAttack = true;
+
+  Chest? _recentChest;
 
   DwarfWarrior({
     required super.position,
@@ -88,7 +91,7 @@ class DwarfWarrior extends PlatformPlayer
 
   @override
   Future<void> onLoad() {
-    add(size.sizeToHitbox());
+    add(size.actorToHitbox());
     return super.onLoad();
   }
 
@@ -136,10 +139,11 @@ class DwarfWarrior extends PlatformPlayer
     super.onReceiveDamage(attacker, damage, identify);
   }
 
-  void _xAction() => ModalService.showToast(
-        title: 'X Action Called...',
-        type: ToastificationType.warning,
-      );
+  void _xAction() {
+    if (_recentChest != null && !_recentChest!.isOpen) {
+      _recentChest!.openChest();
+    }
+  }
 
   void _yAction() => ModalService.showToast(
         title: 'Y Action Called...',
@@ -156,5 +160,16 @@ class DwarfWarrior extends PlatformPlayer
       type: isPaused ? ToastificationType.success : ToastificationType.warning,
       icon: isPaused ? const Icon(Icons.play_arrow) : const Icon(Icons.pause),
     );
+  }
+
+  @override
+  void onCollision(
+    Set<Vector2> intersectionPoints,
+    PositionComponent other,
+  ) {
+    if (other is Chest) {
+      _recentChest = other;
+    }
+    super.onCollision(intersectionPoints, other);
   }
 }

@@ -6,6 +6,8 @@ class SpriteAnimations {
 
   static final alchemist = _Alchemist();
   static final blacksmith = _Blacksmith();
+  static final bonfire = _Bonfire();
+  static final chest = _Chest();
   static final dwarfWarrior = _DwarfWarrior();
   static final headlessHorseman = _HeadlessHorseman();
   static final lizardman = _Lizardman();
@@ -23,6 +25,34 @@ class _Blacksmith {
   Future<SpriteAnimation> get idle async => _spriteAnimation(
         count: 7,
         path: 'blacksmith',
+      );
+}
+
+class _Bonfire {
+  Future<SpriteAnimation> get idle async => _spriteAnimation(
+        count: 6,
+        path: 'bonfire',
+      );
+}
+
+class _Chest {
+  Future<SpriteAnimation> get closed async => SpriteAnimation.spriteList(
+        [
+          await Sprite.load('chest/0.png'),
+        ],
+        stepTime: Globals.spriteStepTime,
+      );
+
+  Future<SpriteAnimation> get opening async => _spriteAnimation(
+        count: 10,
+        path: 'chest',
+      );
+
+  Future<SpriteAnimation> get open async => SpriteAnimation.spriteList(
+        [
+          await Sprite.load('chest/9.png'),
+        ],
+        stepTime: Globals.spriteStepTime,
       );
 }
 

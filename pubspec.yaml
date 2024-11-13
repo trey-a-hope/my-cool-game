@@ -35,6 +35,15 @@ flutter:
     # Blacksmith
     - assets/images/blacksmith/
 
+    # Background
+    - assets/images/background/
+
+    # Bonfire
+    - assets/images/bonfire/
+
+    # Chest
+    - assets/images/chest/
+
     # Dwarf Warrior
     - assets/images/dwarf_warrior/idle/
     - assets/images/dwarf_warrior/walk/
@@ -66,3 +75,9 @@ flutter:
     - assets/images/minotaur/attack_two/
     - assets/images/minotaur/hurt/
     - assets/images/minotaur/death/
+
+    # Plant
+    - assets/images/plant/
+
+    # World Object
+    - assets/images/world_object/

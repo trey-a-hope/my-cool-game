@@ -8,7 +8,12 @@ import 'package:my_cool_game/domain/core/enums/joystick_actions.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
 import 'package:my_cool_game/domain/entities/npcs/alchemist.dart';
 import 'package:my_cool_game/domain/entities/npcs/blacksmith.dart';
+import 'package:my_cool_game/domain/entities/objects/bonfire.dart';
+import 'package:my_cool_game/domain/entities/objects/chest.dart';
+import 'package:my_cool_game/domain/entities/objects/plant.dart';
+import 'package:my_cool_game/domain/entities/objects/world_object.dart';
 import 'package:my_cool_game/domain/entities/players/dwarf_warrior.dart';
+import 'package:my_cool_game/presentation/game/backgrounds/parallax_background.dart';
 
 class MyCoolGame extends StatefulWidget {
   const MyCoolGame({super.key});
@@ -55,11 +60,7 @@ class _MyCoolGameState extends State<MyCoolGame> {
   bool _devMode = false;
   Key _gameKey = GlobalKey();
 
-  /* 
-  1. Create Parallax Background
-  2. Add Non-Collision Object - Plant
-  3. Add Collision Object - World Object
-  4. Add Vision Object - Chest
+  /*     
   5. Add Sensor & Lighting Object - Bonfire
   */
 
@@ -125,6 +126,8 @@ class _MyCoolGameState extends State<MyCoolGame> {
           position: Vector2.all(20),
           toggleDevMode: _toggleDevMode,
         ),
+        background: ParallaxBackground(),
+        lightingColorGame: Colors.white.withOpacity(0.01),
         onReady: _onReady,
         map: WorldMapBySpritefusion(
           WorldMapReader.fromAsset(Globals.map),
@@ -135,6 +138,12 @@ class _MyCoolGameState extends State<MyCoolGame> {
             'Blacksmith': (properties) => Blacksmith(
                   position: properties,
                 ),
+            'Bonfire': (properties) => Bonfire(
+                  position: properties,
+                ),
+            'Chest': (properties) => Chest(
+                  position: properties,
+                ),
             'Headless Horseman': (properties) => HeadlessHorseman(
                   position: properties,
                 ),
@@ -142,6 +151,12 @@ class _MyCoolGameState extends State<MyCoolGame> {
                   position: properties,
                 ),
             'Minotaur': (properties) => Minotaur(
+                  position: properties,
+                ),
+            'Plant': (properties) => Plant(
+                  position: properties,
+                ),
+            'World Object': (properties) => WorldObject(
                   position: properties,
                 ),
           },

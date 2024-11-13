@@ -135,13 +135,13 @@ class _MyCoolGameState extends State<MyCoolGame> {
             'Blacksmith': (properties) => Blacksmith(
                   position: properties,
                 ),
+            'Headless Horseman': (properties) => HeadlessHorseman(
+                  position: properties,
+                ),
             'Lizardman': (properties) => Lizardman(
                   position: properties,
                 ),
             'Minotaur': (properties) => Minotaur(
-                  position: properties,
-                ),
-            'Headless Horseman': (properties) => HeadlessHorseman(
                   position: properties,
                 ),
           },

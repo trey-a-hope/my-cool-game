@@ -55,6 +55,14 @@ class _MyCoolGameState extends State<MyCoolGame> {
   bool _devMode = false;
   Key _gameKey = GlobalKey();
 
+  /* 
+  1. Create Parallax Background
+  2. Add Non-Collision Object - Plant
+  3. Add Collision Object - World Object
+  4. Add Vision Object - Chest
+  5. Add Sensor & Lighting Object - Bonfire
+  */
+
   @override
   Widget build(BuildContext context) => BonfireWidget(
         key: _gameKey,

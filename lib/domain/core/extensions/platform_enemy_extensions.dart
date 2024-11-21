@@ -65,6 +65,6 @@ extension PlatformEnemyExtensions on PlatformEnemy {
 
     final yDiff = (playerAbsoluteCenter.y - enemyAbsoluteCenter.y).abs();
 
-    return yDiff < 5;
+    return yDiff < (height / 2);
   }
 }

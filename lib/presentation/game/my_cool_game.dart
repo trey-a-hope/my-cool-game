@@ -1,17 +1,8 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_cool_game/domain/entities/enemies/headless_horseman.dart';
-import 'package:my_cool_game/domain/entities/enemies/lizardman.dart';
-import 'package:my_cool_game/domain/entities/enemies/minotaur.dart';
 import 'package:my_cool_game/domain/core/enums/joystick_actions.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
-import 'package:my_cool_game/domain/entities/npcs/alchemist.dart';
-import 'package:my_cool_game/domain/entities/npcs/blacksmith.dart';
-import 'package:my_cool_game/domain/entities/objects/bonfire.dart';
-import 'package:my_cool_game/domain/entities/objects/chest.dart';
-import 'package:my_cool_game/domain/entities/objects/plant.dart';
-import 'package:my_cool_game/domain/entities/objects/world_object.dart';
 import 'package:my_cool_game/domain/entities/players/dwarf_warrior.dart';
 import 'package:my_cool_game/presentation/game/backgrounds/parallax_background.dart';
 
@@ -130,36 +121,8 @@ class _MyCoolGameState extends State<MyCoolGame> {
         lightingColorGame: Colors.white.withOpacity(0.01),
         onReady: _onReady,
         map: WorldMapBySpritefusion(
-          WorldMapReader.fromAsset(Globals.map),
-          objectsBuilder: {
-            'Alchemist': (properties) => Alchemist(
-                  position: properties,
-                ),
-            'Blacksmith': (properties) => Blacksmith(
-                  position: properties,
-                ),
-            'Bonfire': (properties) => Bonfire(
-                  position: properties,
-                ),
-            'Chest': (properties) => Chest(
-                  position: properties,
-                ),
-            'Headless Horseman': (properties) => HeadlessHorseman(
-                  position: properties,
-                ),
-            'Lizardman': (properties) => Lizardman(
-                  position: properties,
-                ),
-            'Minotaur': (properties) => Minotaur(
-                  position: properties,
-                ),
-            'Plant': (properties) => Plant(
-                  position: properties,
-                ),
-            'World Object': (properties) => WorldObject(
-                  position: properties,
-                ),
-          },
+          WorldMapReader.fromAsset(Globals.map.name),
+          objectsBuilder: Globals.map.objectsBuilder,
         ),
       );
 

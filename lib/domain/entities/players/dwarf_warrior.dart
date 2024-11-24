@@ -9,7 +9,7 @@ import 'package:my_cool_game/domain/core/globals.dart';
 import 'package:my_cool_game/domain/core/mixins/screen_boundary_checker.dart';
 import 'package:my_cool_game/data/services/modal_service.dart';
 import 'package:my_cool_game/domain/entities/objects/chest.dart';
-import 'package:my_cool_game/presentation/game/animations/sprite_animations.dart';
+import 'package:my_cool_game/presentation/animations/sprite_animations.dart';
 import 'package:toastification/toastification.dart';
 
 class DwarfWarrior extends PlatformPlayer

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_cool_game/presentation/game/my_cool_game.dart';
+import 'package:my_cool_game/presentation/my_cool_game.dart';
 import 'package:toastification/toastification.dart';
 
 void main() {

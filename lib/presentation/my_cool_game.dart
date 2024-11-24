@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:my_cool_game/domain/core/enums/joystick_actions.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
 import 'package:my_cool_game/domain/entities/players/dwarf_warrior.dart';
-import 'package:my_cool_game/presentation/game/backgrounds/parallax_background.dart';
+import 'package:my_cool_game/presentation/backgrounds/parallax_background.dart';
 
 class MyCoolGame extends StatefulWidget {
   const MyCoolGame({super.key});

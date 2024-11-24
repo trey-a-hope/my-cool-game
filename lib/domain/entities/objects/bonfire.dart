@@ -5,7 +5,7 @@ import 'package:my_cool_game/domain/core/extensions/direction_animation_extensio
 import 'package:my_cool_game/domain/core/extensions/vector2_extensions.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
 import 'package:my_cool_game/domain/entities/players/dwarf_warrior.dart';
-import 'package:my_cool_game/presentation/game/animations/sprite_animations.dart';
+import 'package:my_cool_game/presentation/animations/sprite_animations.dart';
 
 class Bonfire extends GameDecoration with Sensor<DwarfWarrior> {
   static const _positionBuffer = 16.0;
@@ -23,7 +23,7 @@ class Bonfire extends GameDecoration with Sensor<DwarfWarrior> {
             position.y - _positionBuffer,
           ),
         ) {
-    setSensorInterval(1000);
+    setSensorInterval(500);
 
     setupLighting(
       LightingConfig(

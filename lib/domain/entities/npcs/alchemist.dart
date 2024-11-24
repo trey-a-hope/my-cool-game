@@ -1,7 +1,7 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:my_cool_game/domain/core/extensions/vector2_extensions.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
-import 'package:my_cool_game/presentation/game/animations/sprite_animations.dart';
+import 'package:my_cool_game/presentation/animations/sprite_animations.dart';
 
 class Alchemist extends SimpleNpc {
   Alchemist({required super.position})

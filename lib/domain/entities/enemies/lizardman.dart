@@ -6,7 +6,7 @@ import 'package:my_cool_game/domain/core/extensions/platform_enemy_extensions.da
 import 'package:my_cool_game/domain/core/extensions/vector2_extensions.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
 import 'package:my_cool_game/domain/core/mixins/screen_boundary_checker.dart';
-import 'package:my_cool_game/presentation/game/animations/sprite_animations.dart';
+import 'package:my_cool_game/presentation/animations/sprite_animations.dart';
 
 class Lizardman extends PlatformEnemy
     with HandleForces, ScreenBoundaryChecker, UseLifeBar {

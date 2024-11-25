@@ -52,7 +52,11 @@ class _MyCoolGameState extends State<MyCoolGame> {
   Key _gameKey = GlobalKey();
 
   /*     
-  5. Add Sensor & Lighting Object - Bonfire
+    1. Architect Inventory System
+    2. Create Items for Dropping
+    3. Display Inventory Window
+    4. Add Items to Inventory
+    5. Use Items from Inventory
   */
 
   @override

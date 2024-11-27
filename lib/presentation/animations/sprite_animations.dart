@@ -10,6 +10,7 @@ class SpriteAnimations {
   static final chest = _Chest();
   static final dwarfWarrior = _DwarfWarrior();
   static final headlessHorseman = _HeadlessHorseman();
+  static final inventory = _Inventory();
   static final lizardman = _Lizardman();
   static final minotaur = _Minotaur();
 }
@@ -107,6 +108,23 @@ class _HeadlessHorseman {
   Future<SpriteAnimation> get death async => _spriteAnimation(
         count: 10,
         path: 'headless_horseman/death',
+      );
+}
+
+class _Inventory {
+  Future<SpriteAnimation> get coin async => _spriteAnimation(
+        count: 4,
+        path: 'coin',
+      );
+
+  Future<SpriteAnimation> get gem async => _spriteAnimation(
+        count: 4,
+        path: 'gem',
+      );
+
+  Future<SpriteAnimation> get potion async => _spriteAnimation(
+        count: 8,
+        path: 'potion',
       );
 }
 

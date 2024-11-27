@@ -1,13 +1,18 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_cool_game/domain/core/enums/joystick_actions.dart';
+import 'package:my_cool_game/domain/core/enums/overlays.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
 import 'package:my_cool_game/domain/entities/players/dwarf_warrior.dart';
 import 'package:my_cool_game/presentation/backgrounds/parallax_background.dart';
+import 'package:my_cool_game/presentation/overlays/inventory_overlay.dart';
 
 class MyCoolGame extends StatefulWidget {
-  const MyCoolGame({super.key});
+  final WidgetRef ref;
+
+  const MyCoolGame(this.ref, {super.key});
 
   @override
   State<MyCoolGame> createState() => _MyCoolGameState();
@@ -50,14 +55,6 @@ class _MyCoolGameState extends State<MyCoolGame> {
 
   bool _devMode = false;
   Key _gameKey = GlobalKey();
-
-  /*     
-    1. Architect Inventory System
-    2. Create Items for Dropping
-    3. Display Inventory Window
-    4. Add Items to Inventory
-    5. Use Items from Inventory
-  */
 
   @override
   Widget build(BuildContext context) => BonfireWidget(
@@ -116,8 +113,18 @@ class _MyCoolGameState extends State<MyCoolGame> {
             ],
           ),
         ],
+        overlayBuilderMap: {
+          Overlays.inventory.name: (context, game) => InventoryOverlay(
+                player: game.player,
+                onClose: () {
+                  game.resumeEngine();
+                  game.overlays.remove(Overlays.inventory.name);
+                },
+              )
+        },
         cameraConfig: _cameraConfig,
         player: DwarfWarrior(
+          widget.ref,
           position: Vector2.all(20),
           toggleDevMode: _toggleDevMode,
         ),

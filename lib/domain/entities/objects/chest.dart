@@ -1,11 +1,9 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:my_cool_game/data/services/modal_service.dart';
+import 'package:my_cool_game/domain/core/extensions/game_component_extensions.dart';
 import 'package:my_cool_game/domain/core/extensions/vector2_extensions.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
 import 'package:my_cool_game/presentation/animations/sprite_animations.dart';
-import 'package:toastification/toastification.dart';
 
 class Chest extends GameDecoration with Vision {
   static const _positionBuffer = 16.0;
@@ -67,13 +65,7 @@ class Chest extends GameDecoration with Vision {
             await SpriteAnimations.chest.open,
           );
 
-          ModalService.showToast(
-            title: 'You got an award!',
-            type: ToastificationType.success,
-            icon: Icon(
-              MdiIcons.trophy,
-            ),
-          );
+          dropItem();
         },
       );
     }

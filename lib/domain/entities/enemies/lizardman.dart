@@ -2,6 +2,7 @@ import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:my_cool_game/domain/core/enums/platform_animations_other.dart';
 import 'package:my_cool_game/domain/core/extensions/direction_animation_extensions.dart';
+import 'package:my_cool_game/domain/core/extensions/game_component_extensions.dart';
 import 'package:my_cool_game/domain/core/extensions/platform_enemy_extensions.dart';
 import 'package:my_cool_game/domain/core/extensions/vector2_extensions.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
@@ -81,7 +82,7 @@ class Lizardman extends PlatformEnemy
   void onDie() {
     playOnceOther(
       other: PlatformAnimationsOther.death,
-      onFinish: () => removeFromParent(),
+      onFinish: () => dropItem(),
     );
     super.onDie();
   }

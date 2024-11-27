@@ -16,6 +16,8 @@ dependencies:
   cupertino_icons: ^1.0.6
   material_design_icons_flutter: ^7.0.7296
   toastification: ^2.3.0
+  flutter_riverpod: ^2.6.1
+  gap: ^3.0.1
 
 dev_dependencies:
   flutter_test:
@@ -44,12 +46,18 @@ flutter:
     # Chest
     - assets/images/chest/
 
+    # Coin
+    - assets/images/coin/
+
     # Dwarf Warrior
     - assets/images/dwarf_warrior/idle/
     - assets/images/dwarf_warrior/walk/
     - assets/images/dwarf_warrior/attack/
     - assets/images/dwarf_warrior/hurt/
     - assets/images/dwarf_warrior/death/
+
+    # Gem
+    - assets/images/gem/
 
     # Headless Horseman
     - assets/images/headless_horseman/idle/
@@ -60,6 +68,9 @@ flutter:
 
     # Input
     - assets/images/input/
+
+    # Item
+    - assets/images/item/
 
     # Lizardman
     - assets/images/lizardman/idle/
@@ -78,6 +89,9 @@ flutter:
 
     # Plant
     - assets/images/plant/
+
+    # Potion
+    - assets/images/potion/
 
     # World Object
     - assets/images/world_object/

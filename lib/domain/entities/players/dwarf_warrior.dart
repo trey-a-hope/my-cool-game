@@ -1,13 +1,20 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_cool_game/domain/core/enums/joystick_actions.dart';
+import 'package:my_cool_game/domain/core/enums/overlays.dart';
 import 'package:my_cool_game/domain/core/enums/platform_animations_other.dart';
 import 'package:my_cool_game/domain/core/extensions/direction_animation_extensions.dart';
 import 'package:my_cool_game/domain/core/extensions/vector2_extensions.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
 import 'package:my_cool_game/domain/core/mixins/screen_boundary_checker.dart';
 import 'package:my_cool_game/data/services/modal_service.dart';
+import 'package:my_cool_game/domain/core/providers.dart';
+import 'package:my_cool_game/domain/entities/items/coin.dart';
+import 'package:my_cool_game/domain/entities/items/gem.dart';
+import 'package:my_cool_game/domain/entities/items/item.dart';
+import 'package:my_cool_game/domain/entities/items/potion.dart';
 import 'package:my_cool_game/domain/entities/objects/chest.dart';
 import 'package:my_cool_game/presentation/animations/sprite_animations.dart';
 import 'package:toastification/toastification.dart';
@@ -22,7 +29,10 @@ class DwarfWarrior extends PlatformPlayer
 
   Chest? _recentChest;
 
-  DwarfWarrior({
+  final WidgetRef ref;
+
+  DwarfWarrior(
+    this.ref, {
     required super.position,
     required this.toggleDevMode,
   }) : super(
@@ -145,10 +155,10 @@ class DwarfWarrior extends PlatformPlayer
     }
   }
 
-  void _yAction() => ModalService.showToast(
-        title: 'Y Action Called...',
-        type: ToastificationType.warning,
-      );
+  void _yAction() {
+    gameRef.pauseEngine();
+    gameRef.overlays.add(Overlays.inventory.name);
+  }
 
   void _togglePause() {
     final isPaused = gameRef.paused;
@@ -167,9 +177,37 @@ class DwarfWarrior extends PlatformPlayer
     Set<Vector2> intersectionPoints,
     PositionComponent other,
   ) {
-    if (other is Chest) {
-      _recentChest = other;
+    Item? item;
+
+    switch (other) {
+      case Chest():
+        _recentChest = other;
+        break;
+      case PotionDecoration():
+        item = Potion();
+        break;
+      case GemDecoration():
+        item = Gem();
+        break;
+      case CoinDecoration():
+        item = Coin();
+        break;
     }
+
+    if (item != null) {
+      ref.read(Providers.inventoryProvider.notifier).addItem(item);
+
+      ModalService.showToast(
+        title: '${item.name} added to inventory.',
+        type: ToastificationType.success,
+        icon: Image.asset(
+          'assets/images/${item.spritePath}',
+          width: Globals.tileSize,
+          height: Globals.tileSize,
+        ),
+      );
+    }
+
     super.onCollision(intersectionPoints, other);
   }
 }

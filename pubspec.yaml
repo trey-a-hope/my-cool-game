@@ -12,8 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  bonfire: ^3.11.0
-  cupertino_icons: ^1.0.6
+  bonfire: ^3.12.3
+  cupertino_icons: ^1.0.8
   material_design_icons_flutter: ^7.0.7296
   toastification: ^2.3.0
   flutter_riverpod: ^2.6.1

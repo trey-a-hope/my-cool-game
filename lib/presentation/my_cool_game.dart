@@ -56,6 +56,16 @@ class _MyCoolGameState extends State<MyCoolGame> {
   bool _devMode = false;
   Key _gameKey = GlobalKey();
 
+  /*
+    OUTLINE
+    1. Create Game Over & Game Won Overlays
+    2. Create the two items for the story
+    3. Create the Game Progress Notifier
+    4. Create conversation for the alchemist
+    5. Create conversation for the blacksmith
+    6. Update Game State During Progression
+  */
+
   @override
   Widget build(BuildContext context) => BonfireWidget(
         key: _gameKey,

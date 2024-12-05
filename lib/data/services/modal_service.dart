@@ -9,26 +9,16 @@ class ModalService {
   }) async =>
       await showDialog<bool>(
         context: context,
-        builder: (c) => AlertDialog(
-          title: Text(title),
-          content: Text(message),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              child: const Text(
-                'YES',
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: const Text(
-                'NO',
-                style: TextStyle(color: Colors.black),
-              ),
-            )
-          ],
-        ),
+        builder: (c) {
+          return AlertDialog(
+            title: Text(title),
+            content: Text(message),
+            actions: [
+              _confirmationAction('YES', true, context),
+              _confirmationAction('NO', false, context),
+            ],
+          );
+        },
       );
 
   static void showToast({
@@ -45,5 +35,18 @@ class ModalService {
         ),
         showProgressBar: false,
         closeButtonShowType: CloseButtonShowType.none,
+      );
+
+  static TextButton _confirmationAction(
+    String s,
+    bool b,
+    BuildContext c,
+  ) =>
+      TextButton(
+        onPressed: () => Navigator.of(c).pop(b),
+        child: Text(
+          s,
+          style: const TextStyle(color: Colors.black),
+        ),
       );
 }

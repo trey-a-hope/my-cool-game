@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class OverlayContainer extends StatelessWidget {
-  final String title;
-  final void Function() onClose;
+  final String? title;
+  final void Function()? onClose;
   final Widget child;
 
   const OverlayContainer({
-    required this.title,
-    required this.onClose,
+    this.title,
+    this.onClose,
     required this.child,
     super.key,
   });
@@ -35,20 +35,24 @@ class OverlayContainer extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      title,
-                      style:
-                          Theme.of(context).textTheme.headlineLarge!.copyWith(
-                                color: Colors.white,
-                              ),
-                    ),
-                    IconButton(
-                      onPressed: onClose,
-                      icon: const Icon(
-                        Icons.close,
-                        color: Colors.white,
+                    if (title != null) ...[
+                      Text(
+                        title!,
+                        style:
+                            Theme.of(context).textTheme.headlineLarge!.copyWith(
+                                  color: Colors.white,
+                                ),
                       ),
-                    ),
+                    ],
+                    if (onClose != null) ...[
+                      IconButton(
+                        onPressed: onClose,
+                        icon: const Icon(
+                          Icons.close,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
                   ],
                 ),
                 const Gap(16),

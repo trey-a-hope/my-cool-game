@@ -49,7 +49,8 @@ class InventoryOverlay extends ConsumerWidget {
                   children: [
                     GestureDetector(
                       onTap: () async {
-                        if (player == null || item.id == 'coin') return;
+                        if (player == null ||
+                            (item.id != 'potion' && item.id != 'gem')) return;
 
                         final confirm = await ModalService.showConfirmation(
                           title: 'Use ${item.name}',
@@ -61,16 +62,18 @@ class InventoryOverlay extends ConsumerWidget {
 
                         inventoryNotifier.removeItem(item.id);
 
+                        final icon = Image.asset(
+                          'assets/images/${item.spritePath}',
+                          width: Globals.tileSize,
+                          height: Globals.tileSize,
+                        );
+
                         switch (item.id) {
                           case 'potion':
                             ModalService.showToast(
                               title: '25 HP Replenished',
                               type: ToastificationType.success,
-                              icon: Image.asset(
-                                'assets/images/${item.spritePath}',
-                                width: Globals.tileSize,
-                                height: Globals.tileSize,
-                              ),
+                              icon: icon,
                             );
                             player!.addLife(25);
                             break;
@@ -78,11 +81,7 @@ class InventoryOverlay extends ConsumerWidget {
                             ModalService.showToast(
                               title: 'All HP Replenished',
                               type: ToastificationType.success,
-                              icon: Image.asset(
-                                'assets/images/${item.spritePath}',
-                                width: Globals.tileSize,
-                                height: Globals.tileSize,
-                              ),
+                              icon: icon,
                             );
                             player!.addLife(100);
                             break;

@@ -14,6 +14,7 @@ class Globals {
 
   static final forces = _Forces();
   static final input = _Input();
+  static final lottie = _Lottie();
   static final map = _Map();
 
   static const spriteStepTime = 0.1;
@@ -39,6 +40,11 @@ class _Input {
   final yPressed = '${path}y_pressed.png';
   final yUnpressed = '${path}y_unpressed.png';
   final leftJoystick = '${path}left_joystick.png';
+}
+
+class _Lottie {
+  final gameOver = 'assets/lotties/game_over.json';
+  final gameWon = 'assets/lotties/game_won.json';
 }
 
 class _Map {

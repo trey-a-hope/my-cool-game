@@ -13,7 +13,7 @@ class InventoryNotifier extends riverpod.Notifier<List<Item>> {
       return item;
     }).toList();
 
-    if (!state.any((item) => item.id == newItem.id)) {
+    if (!hasItem(newItem.id)) {
       state = [...state, newItem];
     }
   }
@@ -31,4 +31,8 @@ class InventoryNotifier extends riverpod.Notifier<List<Item>> {
         .whereType<Item>()
         .toList();
   }
+
+  bool hasItem(String itemId) => state.any((item) => item.id == itemId);
+
+  void resetInventory() => state = [];
 }

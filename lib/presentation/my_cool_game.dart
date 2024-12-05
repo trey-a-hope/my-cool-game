@@ -2,11 +2,15 @@ import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_cool_game/domain/core/enums/game_progress.dart';
 import 'package:my_cool_game/domain/core/enums/joystick_actions.dart';
 import 'package:my_cool_game/domain/core/enums/overlays.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
+import 'package:my_cool_game/domain/core/providers.dart';
 import 'package:my_cool_game/domain/entities/players/dwarf_warrior.dart';
 import 'package:my_cool_game/presentation/backgrounds/parallax_background.dart';
+import 'package:my_cool_game/presentation/overlays/game_over_overlay.dart';
+import 'package:my_cool_game/presentation/overlays/game_won_overlay.dart';
 import 'package:my_cool_game/presentation/overlays/inventory_overlay.dart';
 
 class MyCoolGame extends StatefulWidget {
@@ -54,6 +58,7 @@ class _MyCoolGameState extends State<MyCoolGame> {
   );
 
   bool _devMode = false;
+
   Key _gameKey = GlobalKey();
 
   @override
@@ -114,6 +119,12 @@ class _MyCoolGameState extends State<MyCoolGame> {
           ),
         ],
         overlayBuilderMap: {
+          Overlays.gameOver.name: (context, game) => GameOverOverlay(
+                onReset: _onReset,
+              ),
+          Overlays.gameWon.name: (context, game) => GameWonOverlay(
+                onReset: _onReset,
+              ),
           Overlays.inventory.name: (context, game) => InventoryOverlay(
                 player: game.player,
                 onClose: () {
@@ -136,6 +147,16 @@ class _MyCoolGameState extends State<MyCoolGame> {
           objectsBuilder: Globals.map.objectsBuilder,
         ),
       );
+
+  void _onReset() {
+    widget.ref.read(Providers.gameProgressProvider.notifier).updateProgress(
+          GameProgress.start,
+        );
+
+    widget.ref.read(Providers.inventoryProvider.notifier).resetInventory();
+
+    setState(() => _gameKey = UniqueKey());
+  }
 
   void _toggleDevMode() => setState(
         () {

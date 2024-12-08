@@ -7,6 +7,7 @@ import 'package:my_cool_game/domain/core/enums/joystick_actions.dart';
 import 'package:my_cool_game/domain/core/enums/overlays.dart';
 import 'package:my_cool_game/domain/core/enums/platform_animations_other.dart';
 import 'package:my_cool_game/domain/core/extensions/direction_animation_extensions.dart';
+import 'package:my_cool_game/domain/core/extensions/game_component_extensions.dart';
 import 'package:my_cool_game/domain/core/extensions/vector2_extensions.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
 import 'package:my_cool_game/domain/core/mixins/screen_boundary_checker.dart';
@@ -23,10 +24,8 @@ import 'package:my_cool_game/presentation/animations/sprite_animations.dart';
 import 'package:toastification/toastification.dart';
 
 class DwarfWarrior extends PlatformPlayer
-    with HandleForces, MouseEventListener, ScreenBoundaryChecker, UseLifeBar {
+    with HandleForces, ScreenBoundaryChecker, UseLifeBar {
   static const _size = Globals.tileSize * 1.5;
-
-  final void Function() toggleDevMode;
 
   final WidgetRef ref;
 
@@ -40,7 +39,6 @@ class DwarfWarrior extends PlatformPlayer
   DwarfWarrior(
     this.ref, {
     required super.position,
-    required this.toggleDevMode,
   }) : super(
           speed: 100,
           countJumps: 2,
@@ -112,9 +110,6 @@ class DwarfWarrior extends PlatformPlayer
   }
 
   @override
-  void onMouseTap(MouseButton button) => toggleDevMode();
-
-  @override
   void onDie() {
     playOnceOther(
       other: PlatformAnimationsOther.death,
@@ -135,6 +130,10 @@ class DwarfWarrior extends PlatformPlayer
     if (damage < life) {
       playOnceOther(
         other: PlatformAnimationsOther.hurt,
+        onStart: () => playSoundEffect(
+          Globals.audio.dwarfWarriorHurt,
+          ref,
+        ),
       );
     }
 
@@ -291,6 +290,8 @@ class DwarfWarrior extends PlatformPlayer
 
   void _receiveItem(Item item) {
     ref.read(Providers.inventoryProvider.notifier).addItem(item);
+
+    playSoundEffect(Globals.audio.collectItem, ref);
 
     ModalService.showToast(
       title: '${item.name} added to inventory.',

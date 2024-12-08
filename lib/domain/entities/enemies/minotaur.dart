@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_cool_game/domain/core/enums/platform_animations_other.dart';
 import 'package:my_cool_game/domain/core/extensions/direction_animation_extensions.dart';
 import 'package:my_cool_game/domain/core/extensions/game_component_extensions.dart';
@@ -15,8 +16,11 @@ class Minotaur extends PlatformEnemy
     with HandleForces, ScreenBoundaryChecker, UseLifeBar {
   static const _size = Globals.tileSize * 1.5;
 
+  final WidgetRef ref;
+
   Minotaur({
     required super.position,
+    required this.ref,
   }) : super(
           life: 100,
           size: Vector2.all(_size),
@@ -64,6 +68,10 @@ class Minotaur extends PlatformEnemy
               other: Random().nextBool()
                   ? PlatformAnimationsOther.attackOne
                   : PlatformAnimationsOther.attackTwo,
+              onStart: () => playSoundEffect(
+                Globals.audio.minotaurAttack,
+                ref,
+              ),
             ),
           );
         }

@@ -2,6 +2,7 @@ import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_cool_game/data/services/modal_service.dart';
+import 'package:my_cool_game/domain/core/extensions/game_component_extensions.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
 import 'package:my_cool_game/domain/core/providers.dart';
 import 'package:my_cool_game/presentation/overlays/overlay_container.dart';
@@ -75,6 +76,7 @@ class InventoryOverlay extends ConsumerWidget {
                               type: ToastificationType.success,
                               icon: icon,
                             );
+                            player!.playSoundEffect(Globals.audio.potion, ref);
                             player!.addLife(25);
                             break;
                           case 'gem':
@@ -83,6 +85,7 @@ class InventoryOverlay extends ConsumerWidget {
                               type: ToastificationType.success,
                               icon: icon,
                             );
+                            player!.playSoundEffect(Globals.audio.gem, ref);
                             player!.addLife(100);
                             break;
                         }

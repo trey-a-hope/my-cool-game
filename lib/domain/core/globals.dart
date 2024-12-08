@@ -1,17 +1,9 @@
 import 'package:bonfire/bonfire.dart';
-import 'package:my_cool_game/domain/entities/enemies/headless_horseman.dart';
-import 'package:my_cool_game/domain/entities/enemies/lizardman.dart';
-import 'package:my_cool_game/domain/entities/enemies/minotaur.dart';
-import 'package:my_cool_game/domain/entities/npcs/alchemist.dart';
-import 'package:my_cool_game/domain/entities/npcs/blacksmith.dart';
-import 'package:my_cool_game/domain/entities/objects/bonfire.dart';
-import 'package:my_cool_game/domain/entities/objects/chest.dart';
-import 'package:my_cool_game/domain/entities/objects/plant.dart';
-import 'package:my_cool_game/domain/entities/objects/world_object.dart';
 
 class Globals {
   Globals._();
 
+  static final audio = _Audio();
   static final forces = _Forces();
   static final input = _Input();
   static final lottie = _Lottie();
@@ -19,6 +11,19 @@ class Globals {
 
   static const spriteStepTime = 0.1;
   static const tileSize = 32.0;
+}
+
+class _Audio {
+  final backgroundMusic = 'background_music.mp3';
+  final collectItem = 'collect_item.wav';
+  final dwarfWarriorHurt = 'dwarf_warrior_hurt.wav';
+  final flame = 'flame.wav';
+  final gem = 'gem.flac';
+  final headlessHorsemanAttack = 'headless_horseman_attack.wav';
+  final lizardManAttack = 'lizard_man_attack.wav';
+  final lizardManDie = 'lizard_man_die.wav';
+  final minotaurAttack = 'minotaur_attack.wav';
+  final potion = 'potion.wav';
 }
 
 class _Forces {
@@ -49,34 +54,4 @@ class _Lottie {
 
 class _Map {
   final name = 'map.json';
-
-  final objectsBuilder = {
-    'Alchemist': (properties) => Alchemist(
-          position: properties,
-        ),
-    'Blacksmith': (properties) => Blacksmith(
-          position: properties,
-        ),
-    'Bonfire': (properties) => Bonfire(
-          position: properties,
-        ),
-    'Chest': (properties) => Chest(
-          position: properties,
-        ),
-    'Headless Horseman': (properties) => HeadlessHorseman(
-          position: properties,
-        ),
-    'Lizardman': (properties) => Lizardman(
-          position: properties,
-        ),
-    'Minotaur': (properties) => Minotaur(
-          position: properties,
-        ),
-    'Plant': (properties) => Plant(
-          position: properties,
-        ),
-    'World Object': (properties) => WorldObject(
-          position: properties,
-        ),
-  };
 }

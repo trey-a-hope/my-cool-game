@@ -38,11 +38,11 @@ flutter:
     # Alchemist
     - assets/images/alchemist/
 
-    # Blacksmith
-    - assets/images/blacksmith/
-
     # Background
     - assets/images/background/
+
+    # Blacksmith
+    - assets/images/blacksmith/
 
     # Bonfire
     - assets/images/bonfire/

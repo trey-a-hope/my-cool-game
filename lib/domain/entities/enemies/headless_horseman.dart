@@ -1,5 +1,6 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_cool_game/domain/core/enums/platform_animations_other.dart';
 import 'package:my_cool_game/domain/core/extensions/direction_animation_extensions.dart';
 import 'package:my_cool_game/domain/core/extensions/game_component_extensions.dart';
@@ -13,8 +14,11 @@ class HeadlessHorseman extends PlatformEnemy
     with HandleForces, ScreenBoundaryChecker, UseLifeBar {
   static const _size = Globals.tileSize * 2;
 
+  final WidgetRef ref;
+
   HeadlessHorseman({
     required super.position,
+    required this.ref,
   }) : super(
           life: 200,
           size: Vector2.all(_size),
@@ -59,6 +63,10 @@ class HeadlessHorseman extends PlatformEnemy
             size: size,
             execute: () => playOnceOther(
               other: PlatformAnimationsOther.attackOne,
+              onStart: () => playSoundEffect(
+                Globals.audio.headlessHorsemanAttack,
+                ref,
+              ),
             ),
           );
         }

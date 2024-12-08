@@ -1,4 +1,5 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,7 +12,18 @@ import 'package:my_cool_game/domain/entities/players/dwarf_warrior.dart';
 import 'package:my_cool_game/presentation/backgrounds/parallax_background.dart';
 import 'package:my_cool_game/presentation/overlays/game_over_overlay.dart';
 import 'package:my_cool_game/presentation/overlays/game_won_overlay.dart';
+import 'package:my_cool_game/presentation/overlays/settings_button_overlay.dart';
 import 'package:my_cool_game/presentation/overlays/inventory_overlay.dart';
+import 'package:my_cool_game/presentation/overlays/audio_settings_overlay.dart';
+import 'package:my_cool_game/domain/entities/enemies/headless_horseman.dart';
+import 'package:my_cool_game/domain/entities/enemies/lizardman.dart';
+import 'package:my_cool_game/domain/entities/enemies/minotaur.dart';
+import 'package:my_cool_game/domain/entities/npcs/alchemist.dart';
+import 'package:my_cool_game/domain/entities/npcs/blacksmith.dart';
+import 'package:my_cool_game/domain/entities/objects/bonfire.dart';
+import 'package:my_cool_game/domain/entities/objects/chest.dart';
+import 'package:my_cool_game/domain/entities/objects/plant.dart';
+import 'package:my_cool_game/domain/entities/objects/world_object.dart';
 
 class MyCoolGame extends StatefulWidget {
   final WidgetRef ref;
@@ -57,15 +69,19 @@ class _MyCoolGameState extends State<MyCoolGame> {
     moveOnlyMapArea: true,
   );
 
-  bool _devMode = false;
-
   Key _gameKey = GlobalKey();
+
+  @override
+  void dispose() {
+    super.dispose();
+    FlameAudio.bgm.dispose();
+  }
 
   @override
   Widget build(BuildContext context) => BonfireWidget(
         key: _gameKey,
-        debugMode: _devMode,
-        showCollisionArea: _devMode,
+        debugMode: false,
+        showCollisionArea: false,
         playerControllers: [
           Keyboard(
             config: KeyboardConfig(
@@ -118,6 +134,7 @@ class _MyCoolGameState extends State<MyCoolGame> {
             ],
           ),
         ],
+        initialActiveOverlays: [Overlays.audioSettingsButton.name],
         overlayBuilderMap: {
           Overlays.gameOver.name: (context, game) => GameOverOverlay(
                 onReset: _onReset,
@@ -131,20 +148,60 @@ class _MyCoolGameState extends State<MyCoolGame> {
                   game.resumeEngine();
                   game.overlays.remove(Overlays.inventory.name);
                 },
-              )
+              ),
+          Overlays.audioSettings.name: (context, game) => AudioSettingsOverlay(
+                onClose: () {
+                  game.resumeEngine();
+                  game.overlays.remove(Overlays.audioSettings.name);
+                },
+              ),
+          Overlays.audioSettingsButton.name: (context, game) =>
+              AudioSettingsButtonOverlay(game: game),
         },
         cameraConfig: _cameraConfig,
         player: DwarfWarrior(
           widget.ref,
           position: Vector2.all(20),
-          toggleDevMode: _toggleDevMode,
         ),
         background: ParallaxBackground(),
         lightingColorGame: Colors.white.withOpacity(0.01),
         onReady: _onReady,
         map: WorldMapBySpritefusion(
           WorldMapReader.fromAsset(Globals.map.name),
-          objectsBuilder: Globals.map.objectsBuilder,
+          // TODO: Move this out from globals, going to pass a ref down to each enemy.
+          objectsBuilder: {
+            'Alchemist': (properties) => Alchemist(
+                  position: properties,
+                ),
+            'Blacksmith': (properties) => Blacksmith(
+                  position: properties,
+                ),
+            'Bonfire': (properties) => Bonfire(
+                  position: properties,
+                  ref: widget.ref,
+                ),
+            'Chest': (properties) => Chest(
+                  position: properties,
+                ),
+            'Headless Horseman': (properties) => HeadlessHorseman(
+                  position: properties,
+                  ref: widget.ref,
+                ),
+            'Lizardman': (properties) => Lizardman(
+                  position: properties,
+                  ref: widget.ref,
+                ),
+            'Minotaur': (properties) => Minotaur(
+                  position: properties,
+                  ref: widget.ref,
+                ),
+            'Plant': (properties) => Plant(
+                  position: properties,
+                ),
+            'World Object': (properties) => WorldObject(
+                  position: properties,
+                ),
+          },
         ),
       );
 
@@ -158,13 +215,11 @@ class _MyCoolGameState extends State<MyCoolGame> {
     setState(() => _gameKey = UniqueKey());
   }
 
-  void _toggleDevMode() => setState(
-        () {
-          _devMode = !_devMode;
-          _gameKey = UniqueKey();
-        },
-      );
+  void _onReady(BonfireGameInterface i) {
+    debugPrint('"My Cool Game" is now ready. 👍🏾');
 
-  void _onReady(BonfireGameInterface i) =>
-      debugPrint('"My Cool Game" is now ready. 👍🏾');
+    widget.ref.read(Providers.audioSettingsProvider.notifier).initializeMusic(
+          Globals.audio.backgroundMusic,
+        );
+  }
 }

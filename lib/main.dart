@@ -11,6 +11,7 @@ void main() async {
   await FlameAudio.audioCache.loadAll(
     [
       Globals.audio.backgroundMusic,
+      // TODO: Load the remaining audio files...
     ],
   );
 

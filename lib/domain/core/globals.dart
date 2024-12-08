@@ -15,14 +15,24 @@ class Globals {
 
 class _Audio {
   final backgroundMusic = 'background_music.mp3';
+  // TODO: chestOpen
   final collectItem = 'collect_item.wav';
+  // TODO: dwarfWarriorAttack
+  // TODO: dwarfWarriorDie
   final dwarfWarriorHurt = 'dwarf_warrior_hurt.wav';
   final flame = 'flame.wav';
   final gem = 'gem.flac';
+  // TODO: gameOver
+  // TODO: gameWon
   final headlessHorsemanAttack = 'headless_horseman_attack.wav';
+  // TODO: headlessHorsemanDie
+  // TODO: headlessHorsemanHurt
   final lizardManAttack = 'lizard_man_attack.wav';
   final lizardManDie = 'lizard_man_die.wav';
+  // TODO: lizardManHurt
   final minotaurAttack = 'minotaur_attack.wav';
+  // TODO: minotaurDie
+  // TODO: minotaurHurt
   final potion = 'potion.wav';
 }
 

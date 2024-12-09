@@ -9,7 +9,7 @@ class AudioSettings {
   AudioSettings({
     this.musicVolume = 0.3,
     this.lastMusicVolume = 0.3,
-    this.isMusicMuted = false,
+    this.isMusicMuted = true, // TODO: Negate...
     this.sfxVolume = 1.0,
     this.lastSfxVolume = 1.0,
     this.isSfxMuted = false,

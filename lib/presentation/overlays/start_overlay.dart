@@ -32,28 +32,44 @@ class StartOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => OverlayContainer(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [dwarf, alchemist, blacksmith],
+          child: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Colors.blueAccent.shade100,
+                  Colors.blueAccent.shade700,
+                ],
+              ),
+              borderRadius: BorderRadius.circular(16),
             ),
-            const AdventureStyleText(
-              title: 'My Cool Game',
-            ),
-            const Gap(32),
-            ElevatedButton(
-              onPressed: onStart,
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Text(
-                  'Start',
-                  style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [dwarf, alchemist, blacksmith],
+              ),
+              const AdventureStyleText(
+                title: 'My Cool Game',
+              ),
+              const Gap(32),
+              ElevatedButton(
+                onPressed: onStart,
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text(
+                    'Start',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-      );
+            ],
+          ),
+        ],
+      ));
 }

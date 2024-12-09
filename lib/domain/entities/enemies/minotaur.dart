@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -95,6 +94,10 @@ class Minotaur extends PlatformEnemy
   void onDie() {
     playOnceOther(
       other: PlatformAnimationsOther.death,
+      onStart: () => playSoundEffect(
+        Globals.audio.minotaurDie,
+        ref,
+      ),
       onFinish: () => dropItem(),
     );
     super.onDie();
@@ -110,6 +113,10 @@ class Minotaur extends PlatformEnemy
       if (damage < life) {
         playOnceOther(
           other: PlatformAnimationsOther.hurt,
+          onStart: () => playSoundEffect(
+            Globals.audio.minotaurHurt,
+            ref,
+          ),
         );
       }
 

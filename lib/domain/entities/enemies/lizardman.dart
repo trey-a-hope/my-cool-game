@@ -109,6 +109,10 @@ class Lizardman extends PlatformEnemy
       if (damage < life) {
         playOnceOther(
           other: PlatformAnimationsOther.hurt,
+          onStart: () => playSoundEffect(
+            Globals.audio.lizardManHurt,
+            ref,
+          ),
         );
       }
 

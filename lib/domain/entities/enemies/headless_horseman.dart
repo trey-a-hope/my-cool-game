@@ -90,6 +90,10 @@ class HeadlessHorseman extends PlatformEnemy
   void onDie() {
     playOnceOther(
       other: PlatformAnimationsOther.death,
+      onStart: () => playSoundEffect(
+        Globals.audio.headlessHorsemanDie,
+        ref,
+      ),
       onFinish: () => dropItem(),
     );
     super.onDie();
@@ -105,6 +109,10 @@ class HeadlessHorseman extends PlatformEnemy
       if (damage < life) {
         playOnceOther(
           other: PlatformAnimationsOther.hurt,
+          onStart: () => playSoundEffect(
+            Globals.audio.headlessHorsemanHurt,
+            ref,
+          ),
         );
       }
 

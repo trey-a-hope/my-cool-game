@@ -191,6 +191,7 @@ class _MyCoolGameState extends State<MyCoolGame> {
                 ),
             'Chest': (properties) => Chest(
                   position: properties,
+                  ref: widget.ref,
                 ),
             'Headless Horseman': (properties) => HeadlessHorseman(
                   position: properties,

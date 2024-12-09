@@ -113,9 +113,11 @@ class DwarfWarrior extends PlatformPlayer
   void onDie() {
     playOnceOther(
       other: PlatformAnimationsOther.death,
+      onStart: () => playSoundEffect(Globals.audio.dwarfWarriorDie, ref),
       onFinish: () {
         removeFromParent();
         gameRef.overlays.add(Overlays.gameOver.name);
+        playSoundEffect(Globals.audio.gameOver, ref);
       },
     );
     super.onDie();
@@ -175,7 +177,10 @@ class DwarfWarrior extends PlatformPlayer
     if (_canAttack) {
       playOnceOther(
         other: PlatformAnimationsOther.attackOne,
-        onStart: () => _canAttack = false,
+        onStart: () {
+          playSoundEffect(Globals.audio.dwarfWarriorAttack, ref);
+          _canAttack = false;
+        },
         onFinish: () => _canAttack = true,
       );
 
@@ -200,7 +205,9 @@ class DwarfWarrior extends PlatformPlayer
     }
   }
 
-  void _initiateAlchemistDialog() {
+  void _initiateAlchemistDialog() async {
+    addParticle(CircleParticle(paint: paint, lifespan: 100));
+
     final conversation =
         ref.read(Providers.gameProgressProvider.notifier).getAlchemistDialog();
 
@@ -265,6 +272,7 @@ class DwarfWarrior extends PlatformPlayer
             break;
           case GameProgress.elixerCollected:
             gameRef.overlays.add(Overlays.gameWon.name);
+            playSoundEffect(Globals.audio.gameWon, ref);
             break;
         }
       },

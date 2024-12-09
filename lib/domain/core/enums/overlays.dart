@@ -1,4 +1,5 @@
 enum Overlays {
+  start,
   inventory,
   gameOver,
   gameWon,

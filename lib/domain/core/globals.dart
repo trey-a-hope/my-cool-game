@@ -4,6 +4,7 @@ class Globals {
   Globals._();
 
   static final audio = _Audio();
+  static final fonts = _Fonts();
   static final forces = _Forces();
   static final input = _Input();
   static final lottie = _Lottie();
@@ -34,6 +35,10 @@ class _Audio {
   // TODO: minotaurDie
   // TODO: minotaurHurt
   final potion = 'potion.wav';
+}
+
+class _Fonts {
+  final adventure = 'adventure';
 }
 
 class _Forces {

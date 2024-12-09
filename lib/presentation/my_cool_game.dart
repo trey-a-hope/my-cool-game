@@ -24,6 +24,7 @@ import 'package:my_cool_game/domain/entities/objects/bonfire.dart';
 import 'package:my_cool_game/domain/entities/objects/chest.dart';
 import 'package:my_cool_game/domain/entities/objects/plant.dart';
 import 'package:my_cool_game/domain/entities/objects/world_object.dart';
+import 'package:my_cool_game/presentation/overlays/start_overlay.dart';
 
 class MyCoolGame extends StatefulWidget {
   final WidgetRef ref;
@@ -134,8 +135,17 @@ class _MyCoolGameState extends State<MyCoolGame> {
             ],
           ),
         ],
-        initialActiveOverlays: [Overlays.audioSettingsButton.name],
+        initialActiveOverlays: [
+          Overlays.audioSettingsButton.name,
+          Overlays.start.name
+        ],
         overlayBuilderMap: {
+          Overlays.start.name: (context, game) => StartOverlay(
+                onStart: () {
+                  game.resumeEngine();
+                  game.overlays.remove(Overlays.start.name);
+                },
+              ),
           Overlays.gameOver.name: (context, game) => GameOverOverlay(
                 onReset: _onReset,
               ),
@@ -168,7 +178,6 @@ class _MyCoolGameState extends State<MyCoolGame> {
         onReady: _onReady,
         map: WorldMapBySpritefusion(
           WorldMapReader.fromAsset(Globals.map.name),
-          // TODO: Move this out from globals, going to pass a ref down to each enemy.
           objectsBuilder: {
             'Alchemist': (properties) => Alchemist(
                   position: properties,
@@ -215,8 +224,10 @@ class _MyCoolGameState extends State<MyCoolGame> {
     setState(() => _gameKey = UniqueKey());
   }
 
-  void _onReady(BonfireGameInterface i) {
+  void _onReady(BonfireGameInterface game) {
     debugPrint('"My Cool Game" is now ready. 👍🏾');
+
+    game.pauseEngine();
 
     widget.ref.read(Providers.audioSettingsProvider.notifier).initializeMusic(
           Globals.audio.backgroundMusic,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:my_cool_game/presentation/components/adventure_style_text.dart';
 
 class OverlayContainer extends StatelessWidget {
   final String? title;
@@ -36,12 +37,9 @@ class OverlayContainer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     if (title != null) ...[
-                      Text(
-                        title!,
-                        style:
-                            Theme.of(context).textTheme.headlineLarge!.copyWith(
-                                  color: Colors.white,
-                                ),
+                      AdventureStyleText(
+                        title: title!,
+                        fontSizeMultiplier: 0.01,
                       ),
                     ],
                     if (onClose != null) ...[

@@ -1,4 +1,5 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,10 +24,10 @@ import 'package:my_cool_game/presentation/animations/sprite_animations.dart';
 import 'package:toastification/toastification.dart';
 
 class DwarfWarrior extends PlatformPlayer
-    with HandleForces, MouseEventListener, ScreenBoundaryChecker, UseLifeBar {
+    with HandleForces, ScreenBoundaryChecker, UseLifeBar {
   static const _size = Globals.tileSize * 1.5;
 
-  final void Function() toggleDevMode;
+  // final void Function() toggleDevMode;
 
   final WidgetRef ref;
 
@@ -40,7 +41,7 @@ class DwarfWarrior extends PlatformPlayer
   DwarfWarrior(
     this.ref, {
     required super.position,
-    required this.toggleDevMode,
+    // required this.toggleDevMode,
   }) : super(
           speed: 100,
           countJumps: 2,
@@ -111,19 +112,24 @@ class DwarfWarrior extends PlatformPlayer
     return super.onLoad();
   }
 
-  @override
-  void onMouseTap(MouseButton button) => toggleDevMode();
+  // @override
+  // void onMouseTap(MouseButton button) => toggleDevMode();
 
   @override
   void onDie() {
-    playOnceOther(
-      other: PlatformAnimationsOther.death,
-      onFinish: () {
-        removeFromParent();
-        gameRef.overlays.add(Overlays.gameOver.name);
-      },
-    );
     super.onDie();
+
+    if (kDebugMode) {
+      gameRef.overlays.add(Overlays.gameOver.name);
+    } else {
+      playOnceOther(
+        other: PlatformAnimationsOther.death,
+        onFinish: () {
+          removeFromParent();
+          gameRef.overlays.add(Overlays.gameOver.name);
+        },
+      );
+    }
   }
 
   @override

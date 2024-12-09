@@ -137,7 +137,6 @@ class _MyCoolGameState extends State<MyCoolGame> {
         player: DwarfWarrior(
           widget.ref,
           position: Vector2.all(20),
-          toggleDevMode: _toggleDevMode,
         ),
         background: ParallaxBackground(),
         lightingColorGame: Colors.white.withOpacity(0.01),

@@ -206,8 +206,6 @@ class DwarfWarrior extends PlatformPlayer
   }
 
   void _initiateAlchemistDialog() async {
-    addParticle(CircleParticle(paint: paint, lifespan: 100));
-
     final conversation =
         ref.read(Providers.gameProgressProvider.notifier).getAlchemistDialog();
 

@@ -19,7 +19,7 @@ class _Audio {
   final chestOpening = 'chest_opening.wav';
   final collectItem = 'collect_item.wav';
   final dwarfWarriorAttack = 'dwarf_warrior_attack.mp3';
-  final dwarfWarriorDie = 'dwarf_warrior_die.mp3';
+  final dwarfWarriorDie = 'dwarf_warrior_die.wav';
   final dwarfWarriorHurt = 'dwarf_warrior_hurt.wav';
   final flame = 'flame.wav';
   final gem = 'gem.flac';
@@ -27,7 +27,7 @@ class _Audio {
   final gameWon = 'game_won.wav';
   final headlessHorsemanAttack = 'headless_horseman_attack.wav';
   final headlessHorsemanDie = 'headless_horseman_die.wav';
-  final headlessHorsemanHurt = 'headless_horseman_hurt.ogg';
+  final headlessHorsemanHurt = 'headless_horseman_hurt.wav';
   final lizardManAttack = 'lizard_man_attack.wav';
   final lizardManDie = 'lizard_man_die.wav';
   final lizardManHurt = 'lizard_man_hurt.mp3';

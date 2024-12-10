@@ -205,6 +205,39 @@ class DwarfWarrior extends PlatformPlayer
     }
   }
 
+  void _yAction() {
+    gameRef.pauseEngine();
+    gameRef.overlays.add(Overlays.inventory.name);
+  }
+
+  void _togglePause() {
+    final isPaused = gameRef.paused;
+
+    isPaused ? gameRef.resumeEngine() : gameRef.pauseEngine();
+
+    ModalService.showToast(
+      title: isPaused ? 'Game resumed!' : 'Game paused...',
+      type: isPaused ? ToastificationType.success : ToastificationType.warning,
+      icon: isPaused ? const Icon(Icons.play_arrow) : const Icon(Icons.pause),
+    );
+  }
+
+  void _receiveItem(Item item) {
+    ref.read(Providers.inventoryProvider.notifier).addItem(item);
+
+    playSoundEffect(Globals.audio.collectItem, ref);
+
+    ModalService.showToast(
+      title: '${item.name} added to inventory.',
+      type: ToastificationType.success,
+      icon: Image.asset(
+        'assets/images/${item.spritePath}',
+        width: Globals.tileSize,
+        height: Globals.tileSize,
+      ),
+    );
+  }
+
   void _initiateAlchemistDialog() async {
     final conversation =
         ref.read(Providers.gameProgressProvider.notifier).getAlchemistDialog();
@@ -278,39 +311,6 @@ class DwarfWarrior extends PlatformPlayer
             break;
         }
       },
-    );
-  }
-
-  void _yAction() {
-    gameRef.pauseEngine();
-    gameRef.overlays.add(Overlays.inventory.name);
-  }
-
-  void _togglePause() {
-    final isPaused = gameRef.paused;
-
-    isPaused ? gameRef.resumeEngine() : gameRef.pauseEngine();
-
-    ModalService.showToast(
-      title: isPaused ? 'Game resumed!' : 'Game paused...',
-      type: isPaused ? ToastificationType.success : ToastificationType.warning,
-      icon: isPaused ? const Icon(Icons.play_arrow) : const Icon(Icons.pause),
-    );
-  }
-
-  void _receiveItem(Item item) {
-    ref.read(Providers.inventoryProvider.notifier).addItem(item);
-
-    playSoundEffect(Globals.audio.collectItem, ref);
-
-    ModalService.showToast(
-      title: '${item.name} added to inventory.',
-      type: ToastificationType.success,
-      icon: Image.asset(
-        'assets/images/${item.spritePath}',
-        width: Globals.tileSize,
-        height: Globals.tileSize,
-      ),
     );
   }
 }

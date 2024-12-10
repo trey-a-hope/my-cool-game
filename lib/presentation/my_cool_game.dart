@@ -139,17 +139,14 @@ class _MyCoolGameState extends State<MyCoolGame> {
           Overlays.audioSettingsButton.name,
         ],
         overlayBuilderMap: {
-          Overlays.start.name: (context, game) => StartOverlay(
-                onStart: () {
+          Overlays.audioSettings.name: (context, game) => AudioSettingsOverlay(
+                onClose: () {
                   game.resumeEngine();
-                  game.overlays.remove(Overlays.start.name);
-                  widget.ref
-                      .read(Providers.gameProgressProvider.notifier)
-                      .updateProgress(
-                        GameProgress.start,
-                      );
+                  game.overlays.remove(Overlays.audioSettings.name);
                 },
               ),
+          Overlays.audioSettingsButton.name: (context, game) =>
+              AudioSettingsButtonOverlay(game: game),
           Overlays.gameOver.name: (context, game) => GameOverOverlay(
                 onReset: _onReset,
               ),
@@ -163,14 +160,17 @@ class _MyCoolGameState extends State<MyCoolGame> {
                   game.overlays.remove(Overlays.inventory.name);
                 },
               ),
-          Overlays.audioSettings.name: (context, game) => AudioSettingsOverlay(
-                onClose: () {
+          Overlays.start.name: (context, game) => StartOverlay(
+                onStart: () {
                   game.resumeEngine();
-                  game.overlays.remove(Overlays.audioSettings.name);
+                  game.overlays.remove(Overlays.start.name);
+                  widget.ref
+                      .read(Providers.gameProgressProvider.notifier)
+                      .updateProgress(
+                        GameProgress.start,
+                      );
                 },
               ),
-          Overlays.audioSettingsButton.name: (context, game) =>
-              AudioSettingsButtonOverlay(game: game),
         },
         cameraConfig: _cameraConfig,
         player: DwarfWarrior(

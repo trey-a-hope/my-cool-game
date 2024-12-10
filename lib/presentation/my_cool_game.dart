@@ -221,7 +221,7 @@ class _MyCoolGameState extends State<MyCoolGame> {
 
   void _onReset() {
     widget.ref.read(Providers.gameProgressProvider.notifier).updateProgress(
-          GameProgress.start,
+          GameProgress.menu,
         );
 
     widget.ref.read(Providers.inventoryProvider.notifier).resetInventory();

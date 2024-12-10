@@ -1,7 +1,5 @@
-import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:my_cool_game/domain/entities/npcs/alchemist.dart';
 import 'package:my_cool_game/presentation/components/adventure_style_text.dart';
 import 'package:my_cool_game/presentation/overlays/overlay_container.dart';
 

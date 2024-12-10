@@ -137,13 +137,17 @@ class _MyCoolGameState extends State<MyCoolGame> {
         ],
         initialActiveOverlays: [
           Overlays.audioSettingsButton.name,
-          Overlays.start.name
         ],
         overlayBuilderMap: {
           Overlays.start.name: (context, game) => StartOverlay(
                 onStart: () {
                   game.resumeEngine();
                   game.overlays.remove(Overlays.start.name);
+                  widget.ref
+                      .read(Providers.gameProgressProvider.notifier)
+                      .updateProgress(
+                        GameProgress.start,
+                      );
                 },
               ),
           Overlays.gameOver.name: (context, game) => GameOverOverlay(
@@ -229,6 +233,10 @@ class _MyCoolGameState extends State<MyCoolGame> {
     debugPrint('"My Cool Game" is now ready. 👍🏾');
 
     game.pauseEngine();
+
+    if (widget.ref.read(Providers.gameProgressProvider) == GameProgress.menu) {
+      game.overlays.add(Overlays.start.name);
+    }
 
     widget.ref.read(Providers.audioSettingsProvider.notifier).initializeMusic(
           Globals.audio.backgroundMusic,

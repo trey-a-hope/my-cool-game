@@ -1,4 +1,5 @@
 enum GameProgress {
+  menu,
   start,
   searching,
   charcoalCollected,

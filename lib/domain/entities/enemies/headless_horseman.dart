@@ -20,7 +20,7 @@ class HeadlessHorseman extends PlatformEnemy
     required super.position,
     required this.ref,
   }) : super(
-          life: 200,
+          life: 150,
           size: Vector2.all(_size),
           initDirection: Direction.left,
           animation: PlatformAnimations(

@@ -1,4 +1,5 @@
-import 'package:bonfire/bonfire.dart';
+import 'package:bonfire/bonfire.dart' as bonfire;
+import 'package:flutter/material.dart';
 
 class Globals {
   Globals._();
@@ -7,6 +8,7 @@ class Globals {
   static final fonts = _Fonts();
   static final forces = _Forces();
   static final input = _Input();
+  static final imageAssets = _ImageAssets();
   static final lottie = _Lottie();
   static final map = _Map();
 
@@ -42,9 +44,9 @@ class _Fonts {
 }
 
 class _Forces {
-  final gravity = AccelerationForce2D(
+  final gravity = bonfire.AccelerationForce2D(
     id: 'gravity',
-    value: Vector2(0, 400),
+    value: bonfire.Vector2(0, 400),
   );
 }
 
@@ -69,4 +71,37 @@ class _Lottie {
 
 class _Map {
   final name = 'map.json';
+}
+
+class _ImageAssets {
+  static const _images = 'assets/images/';
+
+  final dwarf = Image.asset(
+    '${_images}dwarf_warrior/idle/0.png',
+    scale: 0.3,
+  );
+
+  final alchemist = Image.asset(
+    '${_images}alchemist/0.png',
+    scale: 0.5,
+  );
+
+  final blacksmith = Image.asset(
+    '${_images}blacksmith/0.png',
+    scale: 0.5,
+  );
+
+  final charcoalText = const TextSpan(
+    text: 'charcoal',
+    style: TextStyle(
+      color: Colors.grey,
+    ),
+  );
+
+  final elixerText = const TextSpan(
+    text: 'elixer',
+    style: TextStyle(
+      color: Colors.green,
+    ),
+  );
 }

@@ -12,6 +12,15 @@ import 'package:my_cool_game/presentation/backgrounds/parallax_background.dart';
 import 'package:my_cool_game/presentation/overlays/game_over_overlay.dart';
 import 'package:my_cool_game/presentation/overlays/game_won_overlay.dart';
 import 'package:my_cool_game/presentation/overlays/inventory_overlay.dart';
+import 'package:my_cool_game/domain/entities/enemies/headless_horseman.dart';
+import 'package:my_cool_game/domain/entities/enemies/lizardman.dart';
+import 'package:my_cool_game/domain/entities/enemies/minotaur.dart';
+import 'package:my_cool_game/domain/entities/npcs/alchemist.dart';
+import 'package:my_cool_game/domain/entities/npcs/blacksmith.dart';
+import 'package:my_cool_game/domain/entities/objects/bonfire.dart';
+import 'package:my_cool_game/domain/entities/objects/chest.dart';
+import 'package:my_cool_game/domain/entities/objects/plant.dart';
+import 'package:my_cool_game/domain/entities/objects/world_object.dart';
 
 class MyCoolGame extends StatefulWidget {
   final WidgetRef ref;
@@ -23,6 +32,8 @@ class MyCoolGame extends StatefulWidget {
 }
 
 class _MyCoolGameState extends State<MyCoolGame> {
+  static const _mapName = 'map.json';
+
   static const _buttonPadding = 64.0;
 
   static const _joystickSize = 100.0;
@@ -57,15 +68,13 @@ class _MyCoolGameState extends State<MyCoolGame> {
     moveOnlyMapArea: true,
   );
 
-  bool _devMode = false;
-
   Key _gameKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) => BonfireWidget(
         key: _gameKey,
-        debugMode: _devMode,
-        showCollisionArea: _devMode,
+        debugMode: false,
+        showCollisionArea: false,
         playerControllers: [
           Keyboard(
             config: KeyboardConfig(
@@ -137,14 +146,41 @@ class _MyCoolGameState extends State<MyCoolGame> {
         player: DwarfWarrior(
           widget.ref,
           position: Vector2.all(20),
-          toggleDevMode: _toggleDevMode,
         ),
         background: ParallaxBackground(),
         lightingColorGame: Colors.white.withOpacity(0.01),
         onReady: _onReady,
         map: WorldMapBySpritefusion(
-          WorldMapReader.fromAsset(Globals.map.name),
-          objectsBuilder: Globals.map.objectsBuilder,
+          WorldMapReader.fromAsset(_mapName),
+          objectsBuilder: {
+            'Alchemist': (properties) => Alchemist(
+                  position: properties,
+                ),
+            'Blacksmith': (properties) => Blacksmith(
+                  position: properties,
+                ),
+            'Bonfire': (properties) => Bonfire(
+                  position: properties,
+                ),
+            'Chest': (properties) => Chest(
+                  position: properties,
+                ),
+            'Headless Horseman': (properties) => HeadlessHorseman(
+                  position: properties,
+                ),
+            'Lizardman': (properties) => Lizardman(
+                  position: properties,
+                ),
+            'Minotaur': (properties) => Minotaur(
+                  position: properties,
+                ),
+            'Plant': (properties) => Plant(
+                  position: properties,
+                ),
+            'World Object': (properties) => WorldObject(
+                  position: properties,
+                ),
+          },
         ),
       );
 
@@ -157,13 +193,6 @@ class _MyCoolGameState extends State<MyCoolGame> {
 
     setState(() => _gameKey = UniqueKey());
   }
-
-  void _toggleDevMode() => setState(
-        () {
-          _devMode = !_devMode;
-          _gameKey = UniqueKey();
-        },
-      );
 
   void _onReady(BonfireGameInterface i) =>
       debugPrint('"My Cool Game" is now ready. 👍🏾');

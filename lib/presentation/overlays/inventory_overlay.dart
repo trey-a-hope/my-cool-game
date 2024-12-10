@@ -8,6 +8,8 @@ import 'package:my_cool_game/presentation/overlays/overlay_container.dart';
 import 'package:toastification/toastification.dart';
 
 class InventoryOverlay extends ConsumerWidget {
+  static const _crossAxisCountMultiplier = 216;
+
   final Player? player;
   final void Function() onClose;
 
@@ -21,6 +23,8 @@ class InventoryOverlay extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final inventory = ref.read(Providers.inventoryProvider);
     final inventoryNotifier = ref.read(Providers.inventoryProvider.notifier);
+
+    final width = MediaQuery.of(context).size.width;
 
     return OverlayContainer(
       title: 'Inventory',
@@ -36,8 +40,8 @@ class InventoryOverlay extends ConsumerWidget {
               ),
             )
           : GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 8,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: (width / _crossAxisCountMultiplier).toInt(),
                 mainAxisSpacing: 8,
                 crossAxisSpacing: 64,
               ),

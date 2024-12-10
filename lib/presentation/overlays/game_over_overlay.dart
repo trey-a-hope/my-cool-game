@@ -13,23 +13,30 @@ class GameOverOverlay extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => OverlayContainer(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Lottie.asset(Globals.lottie.gameOver),
-            const Gap(32),
-            ElevatedButton(
-              onPressed: onReset,
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Text(
-                  'Try Again?',
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
+  Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+
+    return OverlayContainer(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Lottie.asset(
+            Globals.lottie.gameOver,
+            height: height * 0.5,
+          ),
+          const Gap(32),
+          ElevatedButton(
+            onPressed: onReset,
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Text(
+                'Try Again?',
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),
-          ],
-        ),
-      );
+          ),
+        ],
+      ),
+    );
+  }
 }

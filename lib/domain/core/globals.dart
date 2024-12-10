@@ -1,30 +1,55 @@
-import 'package:bonfire/bonfire.dart';
-import 'package:my_cool_game/domain/entities/enemies/headless_horseman.dart';
-import 'package:my_cool_game/domain/entities/enemies/lizardman.dart';
-import 'package:my_cool_game/domain/entities/enemies/minotaur.dart';
-import 'package:my_cool_game/domain/entities/npcs/alchemist.dart';
-import 'package:my_cool_game/domain/entities/npcs/blacksmith.dart';
-import 'package:my_cool_game/domain/entities/objects/bonfire.dart';
-import 'package:my_cool_game/domain/entities/objects/chest.dart';
-import 'package:my_cool_game/domain/entities/objects/plant.dart';
-import 'package:my_cool_game/domain/entities/objects/world_object.dart';
+import 'package:bonfire/bonfire.dart' as bonfire;
+import 'package:flutter/material.dart';
 
 class Globals {
   Globals._();
 
   static final forces = _Forces();
+  static final imageAssets = _ImageAssets();
   static final input = _Input();
   static final lottie = _Lottie();
-  static final map = _Map();
 
   static const spriteStepTime = 0.1;
   static const tileSize = 32.0;
 }
 
 class _Forces {
-  final gravity = AccelerationForce2D(
+  final gravity = bonfire.AccelerationForce2D(
     id: 'gravity',
-    value: Vector2(0, 400),
+    value: bonfire.Vector2(0, 400),
+  );
+}
+
+class _ImageAssets {
+  static const _images = 'assets/images/';
+
+  final dwarf = Image.asset(
+    '${_images}dwarf_warrior/idle/0.png',
+    scale: 0.3,
+  );
+
+  final alchemist = Image.asset(
+    '${_images}alchemist/0.png',
+    scale: 0.5,
+  );
+
+  final blacksmith = Image.asset(
+    '${_images}blacksmith/0.png',
+    scale: 0.5,
+  );
+
+  final charcoalText = const TextSpan(
+    text: 'charcoal',
+    style: TextStyle(
+      color: Colors.grey,
+    ),
+  );
+
+  final elixerText = const TextSpan(
+    text: 'elixer',
+    style: TextStyle(
+      color: Colors.green,
+    ),
   );
 }
 
@@ -45,38 +70,4 @@ class _Input {
 class _Lottie {
   final gameOver = 'assets/lotties/game_over.json';
   final gameWon = 'assets/lotties/game_won.json';
-}
-
-class _Map {
-  final name = 'map.json';
-
-  final objectsBuilder = {
-    'Alchemist': (properties) => Alchemist(
-          position: properties,
-        ),
-    'Blacksmith': (properties) => Blacksmith(
-          position: properties,
-        ),
-    'Bonfire': (properties) => Bonfire(
-          position: properties,
-        ),
-    'Chest': (properties) => Chest(
-          position: properties,
-        ),
-    'Headless Horseman': (properties) => HeadlessHorseman(
-          position: properties,
-        ),
-    'Lizardman': (properties) => Lizardman(
-          position: properties,
-        ),
-    'Minotaur': (properties) => Minotaur(
-          position: properties,
-        ),
-    'Plant': (properties) => Plant(
-          position: properties,
-        ),
-    'World Object': (properties) => WorldObject(
-          position: properties,
-        ),
-  };
 }

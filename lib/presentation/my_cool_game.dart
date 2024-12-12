@@ -148,7 +148,7 @@ class _MyCoolGameState extends State<MyCoolGame> {
           position: Vector2.all(20),
         ),
         background: ParallaxBackground(),
-        lightingColorGame: Colors.white.withOpacity(0.01),
+        lightingColorGame: Colors.white.withValues(alpha: 0.01),
         onReady: _onReady,
         map: WorldMapBySpritefusion(
           WorldMapReader.fromAsset(_mapName),

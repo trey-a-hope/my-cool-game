@@ -28,7 +28,7 @@ class Bonfire extends GameDecoration with Sensor<DwarfWarrior> {
     setupLighting(
       LightingConfig(
         radius: Globals.tileSize,
-        color: Colors.yellow.withOpacity(0.3),
+        color: Colors.yellow.withValues(alpha: 0.3),
       ),
     );
   }

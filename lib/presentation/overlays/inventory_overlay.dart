@@ -54,7 +54,9 @@ class InventoryOverlay extends ConsumerWidget {
                     GestureDetector(
                       onTap: () async {
                         if (player == null ||
-                            (item.id != 'potion' && item.id != 'gem')) return;
+                            (item.id != 'potion' && item.id != 'gem')) {
+                          return;
+                        }
 
                         final confirm = await ModalService.showConfirmation(
                           title: 'Use ${item.name}',

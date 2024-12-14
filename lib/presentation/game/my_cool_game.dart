@@ -60,10 +60,6 @@ class _MyCoolGameState extends State<MyCoolGame> {
   bool _devMode = false;
   Key _gameKey = GlobalKey();
 
-  /*     
-  5. Add Sensor & Lighting Object - Bonfire
-  */
-
   @override
   Widget build(BuildContext context) => BonfireWidget(
         key: _gameKey,

@@ -70,6 +70,15 @@ class _MyCoolGameState extends State<MyCoolGame> {
 
   Key _gameKey = GlobalKey();
 
+  /*
+    OUTLINE
+    1. Create Notifier for Audio Settings
+    2. Add Sound Effects to Game Components
+    3. Create an Audio Settings Overlay
+    4. Create a Custom Text Widget
+    5. Create Start Menu Overlay
+  */
+
   @override
   Widget build(BuildContext context) => BonfireWidget(
         key: _gameKey,

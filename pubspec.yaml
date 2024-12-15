@@ -30,6 +30,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/audio/
     - assets/images/
     - assets/lotties/
 

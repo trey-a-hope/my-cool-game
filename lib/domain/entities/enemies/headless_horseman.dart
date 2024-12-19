@@ -1,5 +1,6 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_cool_game/domain/core/enums/platform_animations_other.dart';
 import 'package:my_cool_game/domain/core/extensions/direction_animation_extensions.dart';
 import 'package:my_cool_game/domain/core/extensions/game_component_extensions.dart';
@@ -13,7 +14,10 @@ class HeadlessHorseman extends PlatformEnemy
     with HandleForces, ScreenBoundaryChecker, UseLifeBar {
   static const _size = Globals.tileSize * 2;
 
-  HeadlessHorseman({
+  final WidgetRef ref;
+
+  HeadlessHorseman(
+    this.ref, {
     required super.position,
   }) : super(
           life: 200,
@@ -58,6 +62,10 @@ class HeadlessHorseman extends PlatformEnemy
             damage: 20,
             size: size,
             execute: () => playOnceOther(
+              onStart: () => playSoundEffect(
+                Globals.audio.headlessHorsemanAttack,
+                ref,
+              ),
               other: PlatformAnimationsOther.attackOne,
             ),
           );
@@ -82,6 +90,10 @@ class HeadlessHorseman extends PlatformEnemy
   void onDie() {
     playOnceOther(
       other: PlatformAnimationsOther.death,
+      onStart: () => playSoundEffect(
+        Globals.audio.headlessHorsemanDie,
+        ref,
+      ),
       onFinish: () => dropItem(),
     );
     super.onDie();
@@ -96,6 +108,10 @@ class HeadlessHorseman extends PlatformEnemy
     if (canReceiveDamage(gameRef.player!)) {
       if (damage < life) {
         playOnceOther(
+          onStart: () => playSoundEffect(
+            Globals.audio.headlessHorsemanHurt,
+            ref,
+          ),
           other: PlatformAnimationsOther.hurt,
         );
       }

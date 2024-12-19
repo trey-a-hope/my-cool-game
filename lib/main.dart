@@ -1,10 +1,11 @@
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
 import 'package:my_cool_game/presentation/my_cool_game.dart';
 import 'package:toastification/toastification.dart';
 
-final audio = [
+final audios = [
   Globals.audio.backgroundMusic,
   Globals.audio.chestOpening,
   Globals.audio.collectItem,
@@ -27,8 +28,9 @@ final audio = [
   Globals.audio.potion,
 ];
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await FlameAudio.audioCache.loadAll(audios);
   runApp(const MyApp());
 }
 

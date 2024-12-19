@@ -1,5 +1,6 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_cool_game/domain/core/extensions/game_component_extensions.dart';
 import 'package:my_cool_game/domain/core/extensions/vector2_extensions.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
@@ -10,7 +11,9 @@ class Chest extends GameDecoration with Vision {
   bool _observedPlayer = false;
   bool isOpen = false;
 
-  Chest({required super.position})
+  final WidgetRef ref;
+
+  Chest(this.ref, {required super.position})
       : super.withAnimation(
           animation: SpriteAnimations.chest.closed,
           size: Vector2(
@@ -56,6 +59,8 @@ class Chest extends GameDecoration with Vision {
   void openChest() async {
     if (_observedPlayer) {
       isOpen = true;
+
+      playSoundEffect(Globals.audio.chestOpening, ref);
 
       setAnimation(
         await SpriteAnimations.chest.opening,

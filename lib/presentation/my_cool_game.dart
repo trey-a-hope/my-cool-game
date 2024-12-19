@@ -1,4 +1,5 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,6 +10,8 @@ import 'package:my_cool_game/domain/core/globals.dart';
 import 'package:my_cool_game/domain/core/providers.dart';
 import 'package:my_cool_game/domain/entities/players/dwarf_warrior.dart';
 import 'package:my_cool_game/presentation/backgrounds/parallax_background.dart';
+import 'package:my_cool_game/presentation/overlays/audio_settings_button_overlay.dart';
+import 'package:my_cool_game/presentation/overlays/audio_settings_overlay.dart';
 import 'package:my_cool_game/presentation/overlays/game_over_overlay.dart';
 import 'package:my_cool_game/presentation/overlays/game_won_overlay.dart';
 import 'package:my_cool_game/presentation/overlays/inventory_overlay.dart';
@@ -21,6 +24,7 @@ import 'package:my_cool_game/domain/entities/objects/bonfire.dart';
 import 'package:my_cool_game/domain/entities/objects/chest.dart';
 import 'package:my_cool_game/domain/entities/objects/plant.dart';
 import 'package:my_cool_game/domain/entities/objects/world_object.dart';
+import 'package:my_cool_game/presentation/overlays/start_overlay.dart';
 
 class MyCoolGame extends StatefulWidget {
   final WidgetRef ref;
@@ -70,14 +74,11 @@ class _MyCoolGameState extends State<MyCoolGame> {
 
   Key _gameKey = GlobalKey();
 
-  /*
-    OUTLINE
-    1. Create Notifier for Audio Settings
-    2. Add Sound Effects to Game Components
-    3. Create an Audio Settings Overlay
-    4. Create a Custom Text Widget
-    5. Create Start Menu Overlay
-  */
+  @override
+  void dispose() {
+    super.dispose();
+    FlameAudio.bgm.dispose();
+  }
 
   @override
   Widget build(BuildContext context) => BonfireWidget(
@@ -136,7 +137,29 @@ class _MyCoolGameState extends State<MyCoolGame> {
             ],
           ),
         ],
+        initialActiveOverlays: [Overlays.audioSettingsButton.name],
         overlayBuilderMap: {
+          Overlays.start.name: (context, game) => StartOverlay(
+                onStart: () {
+                  game.resumeEngine();
+                  game.overlays.remove(Overlays.start.name);
+                  widget.ref
+                      .read(Providers.gameProgressProvider.notifier)
+                      .updateProgress(
+                        GameProgress.start,
+                      );
+                },
+              ),
+          Overlays.audioSettings.name: (context, game) => AudioSettingsOverlay(
+                onClose: () {
+                  game.resumeEngine();
+                  game.overlays.remove(Overlays.audioSettings.name);
+                },
+              ),
+          Overlays.audioSettingsButton.name: (context, game) =>
+              AudioSettingsButtonOverlay(
+                game: game,
+              ),
           Overlays.gameOver.name: (context, game) => GameOverOverlay(
                 onReset: _onReset,
               ),
@@ -169,18 +192,23 @@ class _MyCoolGameState extends State<MyCoolGame> {
                   position: properties,
                 ),
             'Bonfire': (properties) => Bonfire(
+                  widget.ref,
                   position: properties,
                 ),
             'Chest': (properties) => Chest(
+                  widget.ref,
                   position: properties,
                 ),
             'Headless Horseman': (properties) => HeadlessHorseman(
+                  widget.ref,
                   position: properties,
                 ),
             'Lizardman': (properties) => Lizardman(
+                  widget.ref,
                   position: properties,
                 ),
             'Minotaur': (properties) => Minotaur(
+                  widget.ref,
                   position: properties,
                 ),
             'Plant': (properties) => Plant(
@@ -203,6 +231,17 @@ class _MyCoolGameState extends State<MyCoolGame> {
     setState(() => _gameKey = UniqueKey());
   }
 
-  void _onReady(BonfireGameInterface i) =>
-      debugPrint('"My Cool Game" is now ready. 👍🏾');
+  void _onReady(BonfireGameInterface i) {
+    debugPrint('"My Cool Game" is now ready. 👍🏾');
+
+    i.pauseEngine();
+
+    if (widget.ref.read(Providers.gameProgressProvider) == GameProgress.menu) {
+      i.overlays.add(Overlays.start.name);
+    }
+
+    widget.ref.read(Providers.audioSettingsProvider.notifier).initializeMusic(
+          Globals.audio.backgroundMusic,
+        );
+  }
 }

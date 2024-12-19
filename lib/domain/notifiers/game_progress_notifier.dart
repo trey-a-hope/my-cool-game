@@ -6,12 +6,14 @@ import 'package:my_cool_game/domain/core/globals.dart';
 
 class GameProgressNotifier extends riverpod.Notifier<GameProgress> {
   @override
-  GameProgress build() => GameProgress.start;
+  GameProgress build() => GameProgress.menu;
 
   void updateProgress(GameProgress progress) => state = progress;
 
   List<Say> getAlchemistDialog() {
     switch (state) {
+      case GameProgress.menu:
+        return [];
       case GameProgress.start:
         return [
           Say(
@@ -93,6 +95,8 @@ class GameProgressNotifier extends riverpod.Notifier<GameProgress> {
 
   List<Say> getBlacksmithDialog() {
     switch (state) {
+      case GameProgress.menu:
+        return [];
       case GameProgress.start:
         return [
           Say(

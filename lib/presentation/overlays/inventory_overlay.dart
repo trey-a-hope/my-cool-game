@@ -2,12 +2,15 @@ import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_cool_game/data/services/modal_service.dart';
+import 'package:my_cool_game/domain/core/extensions/game_component_extensions.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
 import 'package:my_cool_game/domain/core/providers.dart';
 import 'package:my_cool_game/presentation/overlays/overlay_container.dart';
 import 'package:toastification/toastification.dart';
 
 class InventoryOverlay extends ConsumerWidget {
+  static const _crossAxisCountMultiplier = 216;
+
   final Player? player;
   final void Function() onClose;
 
@@ -21,6 +24,8 @@ class InventoryOverlay extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final inventory = ref.read(Providers.inventoryProvider);
     final inventoryNotifier = ref.read(Providers.inventoryProvider.notifier);
+
+    final width = MediaQuery.of(context).size.width;
 
     return OverlayContainer(
       title: 'Inventory',
@@ -36,8 +41,8 @@ class InventoryOverlay extends ConsumerWidget {
               ),
             )
           : GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 8,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: (width / _crossAxisCountMultiplier).toInt(),
                 mainAxisSpacing: 8,
                 crossAxisSpacing: 64,
               ),
@@ -50,7 +55,9 @@ class InventoryOverlay extends ConsumerWidget {
                     GestureDetector(
                       onTap: () async {
                         if (player == null ||
-                            (item.id != 'potion' && item.id != 'gem')) return;
+                            (item.id != 'potion' && item.id != 'gem')) {
+                          return;
+                        }
 
                         final confirm = await ModalService.showConfirmation(
                           title: 'Use ${item.name}',
@@ -75,6 +82,7 @@ class InventoryOverlay extends ConsumerWidget {
                               type: ToastificationType.success,
                               icon: icon,
                             );
+                            player!.playSoundEffect(Globals.audio.potion, ref);
                             player!.addLife(25);
                             break;
                           case 'gem':
@@ -83,6 +91,7 @@ class InventoryOverlay extends ConsumerWidget {
                               type: ToastificationType.success,
                               icon: icon,
                             );
+                            player!.playSoundEffect(Globals.audio.gem, ref);
                             player!.addLife(100);
                             break;
                         }

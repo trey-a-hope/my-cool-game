@@ -1,30 +1,84 @@
-import 'package:bonfire/bonfire.dart';
-import 'package:my_cool_game/domain/entities/enemies/headless_horseman.dart';
-import 'package:my_cool_game/domain/entities/enemies/lizardman.dart';
-import 'package:my_cool_game/domain/entities/enemies/minotaur.dart';
-import 'package:my_cool_game/domain/entities/npcs/alchemist.dart';
-import 'package:my_cool_game/domain/entities/npcs/blacksmith.dart';
-import 'package:my_cool_game/domain/entities/objects/bonfire.dart';
-import 'package:my_cool_game/domain/entities/objects/chest.dart';
-import 'package:my_cool_game/domain/entities/objects/plant.dart';
-import 'package:my_cool_game/domain/entities/objects/world_object.dart';
+import 'package:bonfire/bonfire.dart' as bonfire;
+import 'package:flutter/material.dart';
 
 class Globals {
   Globals._();
 
+  static final audio = _Audio();
+  static final fonts = _Fonts();
   static final forces = _Forces();
+  static final imageAssets = _ImageAssets();
   static final input = _Input();
   static final lottie = _Lottie();
-  static final map = _Map();
 
   static const spriteStepTime = 0.1;
   static const tileSize = 32.0;
 }
 
+class _Audio {
+  final backgroundMusic = 'background_music.mp3';
+  final chestOpening = 'chest_opening.wav';
+  final collectItem = 'collect_item.wav';
+  final dwarfWarriorAttack = 'dwarf_warrior_attack.mp3';
+  final dwarfWarriorDie = 'dwarf_warrior_die.wav';
+  final dwarfWarriorHurt = 'dwarf_warrior_hurt.wav';
+  final flame = 'flame.wav';
+  final gem = 'gem.flac';
+  final gameOver = 'game_over.wav';
+  final gameWon = 'game_won.wav';
+  final headlessHorsemanAttack = 'headless_horseman_attack.wav';
+  final headlessHorsemanDie = 'headless_horseman_die.wav';
+  final headlessHorsemanHurt = 'headless_horseman_hurt.wav';
+  final lizardManAttack = 'lizard_man_attack.wav';
+  final lizardManDie = 'lizard_man_die.wav';
+  final lizardManHurt = 'lizard_man_hurt.mp3';
+  final minotaurAttack = 'minotaur_attack.wav';
+  final minotaurDie = 'minotaur_die.wav';
+  final minotaurHurt = 'minotaur_hurt.wav';
+  final potion = 'potion.wav';
+}
+
+class _Fonts {
+  final adventure = 'adventure';
+}
+
 class _Forces {
-  final gravity = AccelerationForce2D(
+  final gravity = bonfire.AccelerationForce2D(
     id: 'gravity',
-    value: Vector2(0, 400),
+    value: bonfire.Vector2(0, 400),
+  );
+}
+
+class _ImageAssets {
+  static const _images = 'assets/images/';
+
+  final dwarf = Image.asset(
+    '${_images}dwarf_warrior/idle/0.png',
+    scale: 0.3,
+  );
+
+  final alchemist = Image.asset(
+    '${_images}alchemist/0.png',
+    scale: 0.5,
+  );
+
+  final blacksmith = Image.asset(
+    '${_images}blacksmith/0.png',
+    scale: 0.5,
+  );
+
+  final charcoalText = const TextSpan(
+    text: 'charcoal',
+    style: TextStyle(
+      color: Colors.grey,
+    ),
+  );
+
+  final elixerText = const TextSpan(
+    text: 'elixer',
+    style: TextStyle(
+      color: Colors.green,
+    ),
   );
 }
 
@@ -45,38 +99,4 @@ class _Input {
 class _Lottie {
   final gameOver = 'assets/lotties/game_over.json';
   final gameWon = 'assets/lotties/game_won.json';
-}
-
-class _Map {
-  final name = 'map.json';
-
-  final objectsBuilder = {
-    'Alchemist': (properties) => Alchemist(
-          position: properties,
-        ),
-    'Blacksmith': (properties) => Blacksmith(
-          position: properties,
-        ),
-    'Bonfire': (properties) => Bonfire(
-          position: properties,
-        ),
-    'Chest': (properties) => Chest(
-          position: properties,
-        ),
-    'Headless Horseman': (properties) => HeadlessHorseman(
-          position: properties,
-        ),
-    'Lizardman': (properties) => Lizardman(
-          position: properties,
-        ),
-    'Minotaur': (properties) => Minotaur(
-          position: properties,
-        ),
-    'Plant': (properties) => Plant(
-          position: properties,
-        ),
-    'World Object': (properties) => WorldObject(
-          position: properties,
-        ),
-  };
 }

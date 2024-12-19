@@ -8,6 +8,7 @@ import 'package:my_cool_game/domain/core/enums/joystick_actions.dart';
 import 'package:my_cool_game/domain/core/enums/overlays.dart';
 import 'package:my_cool_game/domain/core/enums/platform_animations_other.dart';
 import 'package:my_cool_game/domain/core/extensions/direction_animation_extensions.dart';
+import 'package:my_cool_game/domain/core/extensions/game_component_extensions.dart';
 import 'package:my_cool_game/domain/core/extensions/vector2_extensions.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
 import 'package:my_cool_game/domain/core/mixins/screen_boundary_checker.dart';
@@ -27,8 +28,6 @@ class DwarfWarrior extends PlatformPlayer
     with HandleForces, ScreenBoundaryChecker, UseLifeBar {
   static const _size = Globals.tileSize * 1.5;
 
-  // final void Function() toggleDevMode;
-
   final WidgetRef ref;
 
   bool _canAttack = true;
@@ -41,7 +40,6 @@ class DwarfWarrior extends PlatformPlayer
   DwarfWarrior(
     this.ref, {
     required super.position,
-    // required this.toggleDevMode,
   }) : super(
           speed: 100,
           countJumps: 2,
@@ -112,11 +110,19 @@ class DwarfWarrior extends PlatformPlayer
     return super.onLoad();
   }
 
-  // @override
-  // void onMouseTap(MouseButton button) => toggleDevMode();
-
   @override
   void onDie() {
+    playOnceOther(
+      other: PlatformAnimationsOther.death,
+      onStart: () {
+        playSoundEffect(Globals.audio.dwarfWarriorHurt, ref);
+        playSoundEffect(Globals.audio.gameOver, ref);
+      },
+      onFinish: () {
+        removeFromParent();
+        gameRef.overlays.add(Overlays.gameOver.name);
+      },
+    );
     super.onDie();
 
     if (kDebugMode) {
@@ -140,6 +146,10 @@ class DwarfWarrior extends PlatformPlayer
   ) {
     if (damage < life) {
       playOnceOther(
+        onStart: () => playSoundEffect(
+          Globals.audio.dwarfWarriorHurt,
+          ref,
+        ),
         other: PlatformAnimationsOther.hurt,
       );
     }
@@ -182,7 +192,13 @@ class DwarfWarrior extends PlatformPlayer
     if (_canAttack) {
       playOnceOther(
         other: PlatformAnimationsOther.attackOne,
-        onStart: () => _canAttack = false,
+        onStart: () {
+          _canAttack = false;
+          playSoundEffect(
+            Globals.audio.dwarfWarriorAttack,
+            ref,
+          );
+        },
         onFinish: () => _canAttack = true,
       );
 
@@ -207,6 +223,39 @@ class DwarfWarrior extends PlatformPlayer
     }
   }
 
+  void _yAction() {
+    gameRef.pauseEngine();
+    gameRef.overlays.add(Overlays.inventory.name);
+  }
+
+  void _togglePause() {
+    final isPaused = gameRef.paused;
+
+    isPaused ? gameRef.resumeEngine() : gameRef.pauseEngine();
+
+    ModalService.showToast(
+      title: isPaused ? 'Game resumed!' : 'Game paused...',
+      type: isPaused ? ToastificationType.success : ToastificationType.warning,
+      icon: isPaused ? const Icon(Icons.play_arrow) : const Icon(Icons.pause),
+    );
+  }
+
+  void _receiveItem(Item item) {
+    ref.read(Providers.inventoryProvider.notifier).addItem(item);
+
+    playSoundEffect(Globals.audio.collectItem, ref);
+
+    ModalService.showToast(
+      title: '${item.name} added to inventory.',
+      type: ToastificationType.success,
+      icon: Image.asset(
+        'assets/images/${item.spritePath}',
+        width: Globals.tileSize,
+        height: Globals.tileSize,
+      ),
+    );
+  }
+
   void _initiateAlchemistDialog() {
     final conversation =
         ref.read(Providers.gameProgressProvider.notifier).getAlchemistDialog();
@@ -216,6 +265,8 @@ class DwarfWarrior extends PlatformPlayer
       conversation,
       onFinish: () {
         switch (ref.read(Providers.gameProgressProvider)) {
+          case GameProgress.menu:
+            break;
           case GameProgress.start:
             ref.read(Providers.gameProgressProvider.notifier).updateProgress(
                   GameProgress.searching,
@@ -254,6 +305,8 @@ class DwarfWarrior extends PlatformPlayer
       conversation,
       onFinish: () {
         switch (ref.read(Providers.gameProgressProvider)) {
+          case GameProgress.menu:
+            break;
           case GameProgress.start:
             break;
           case GameProgress.searching:
@@ -272,40 +325,10 @@ class DwarfWarrior extends PlatformPlayer
             break;
           case GameProgress.elixerCollected:
             gameRef.overlays.add(Overlays.gameWon.name);
+            playSoundEffect(Globals.audio.gameWon, ref);
             break;
         }
       },
-    );
-  }
-
-  void _yAction() {
-    gameRef.pauseEngine();
-    gameRef.overlays.add(Overlays.inventory.name);
-  }
-
-  void _togglePause() {
-    final isPaused = gameRef.paused;
-
-    isPaused ? gameRef.resumeEngine() : gameRef.pauseEngine();
-
-    ModalService.showToast(
-      title: isPaused ? 'Game resumed!' : 'Game paused...',
-      type: isPaused ? ToastificationType.success : ToastificationType.warning,
-      icon: isPaused ? const Icon(Icons.play_arrow) : const Icon(Icons.pause),
-    );
-  }
-
-  void _receiveItem(Item item) {
-    ref.read(Providers.inventoryProvider.notifier).addItem(item);
-
-    ModalService.showToast(
-      title: '${item.name} added to inventory.',
-      type: ToastificationType.success,
-      icon: Image.asset(
-        'assets/images/${item.spritePath}',
-        width: Globals.tileSize,
-        height: Globals.tileSize,
-      ),
     );
   }
 }

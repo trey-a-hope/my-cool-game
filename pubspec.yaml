@@ -27,6 +27,7 @@ dependencies:
   gap: ^3.0.1
   lottie: ^3.1.3
   mockito: ^5.4.4
+  flame_audio: ^2.10.2
 
 dev_dependencies:
   flutter_test:
@@ -46,18 +47,24 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  fonts:
+    - family: adventure
+      fonts:
+        - asset: fonts/adventure.otf
+
   assets:
+    - assets/audio/
     - assets/images/
     - assets/lotties/
 
     # Alchemist
     - assets/images/alchemist/
 
-    # Blacksmith
-    - assets/images/blacksmith/
-
     # Background
     - assets/images/background/
+
+    # Blacksmith
+    - assets/images/blacksmith/
 
     # Bonfire
     - assets/images/bonfire/

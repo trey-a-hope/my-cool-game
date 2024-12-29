@@ -36,7 +36,7 @@ class HeadlessHorseman extends PlatformEnemy
             },
           ),
         ) {
-    addForce(Globals.forces.enemyGravity);
+    addForce(Globals.forces.gravity);
 
     setupLifeBar(
       borderRadius: BorderRadius.circular(2),
@@ -47,9 +47,6 @@ class HeadlessHorseman extends PlatformEnemy
 
   @override
   void update(double dt) {
-    if (dt > Globals.deltaThreshold) return;
-    if (gameRef.sceneBuilderStatus.isRunning) return;
-
     checkBoundaries();
 
     seeAndMoveToPlayer(

@@ -30,8 +30,6 @@ class Chest extends GameDecoration with Vision {
 
   @override
   void update(double dt) {
-    if (gameRef.sceneBuilderStatus.isRunning) return;
-
     if (gameRef.player != null) {
       seeComponent(
         gameRef.player!,

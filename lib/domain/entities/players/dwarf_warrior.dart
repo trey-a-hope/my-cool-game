@@ -57,7 +57,7 @@ class DwarfWarrior extends PlatformPlayer
             },
           ),
         ) {
-    addForce(Globals.forces.gravity);
+    addForce(Globals.forces.playerGravity);
 
     setupLifeBar(
       borderRadius: BorderRadius.circular(2),
@@ -100,6 +100,8 @@ class DwarfWarrior extends PlatformPlayer
 
   @override
   void update(double dt) {
+    if (dt > Globals.deltaThreshold) return;
+    if (gameRef.sceneBuilderStatus.isRunning) return;
     checkBoundaries();
     super.update(dt);
   }

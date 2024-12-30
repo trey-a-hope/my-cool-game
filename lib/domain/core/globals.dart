@@ -13,6 +13,7 @@ class Globals {
 
   static const spriteStepTime = 0.1;
   static const tileSize = 32.0;
+  static const deltaThreshold = 0.05;
 }
 
 class _Audio {
@@ -43,9 +44,14 @@ class _Fonts {
 }
 
 class _Forces {
-  final gravity = bonfire.AccelerationForce2D(
-    id: 'gravity',
+  final playerGravity = bonfire.AccelerationForce2D(
+    id: 'player_gravity',
     value: bonfire.Vector2(0, 400),
+  );
+
+  final enemyGravity = bonfire.AccelerationForce2D(
+    id: 'enemy_gravity',
+    value: bonfire.Vector2(0, 4000),
   );
 }
 

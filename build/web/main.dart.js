@@ -29069,7 +29069,7 @@ A.aqJ.prototype={
 $1(a){var s=A.eg().b
 if(s==null)s=null
 else{s=s.canvasKitBaseUrl
-if(s==null)s=null}return(s==null?"https://www.gstatic.com/flutter-canvaskit/cb4b5fff73850b2e42bd4de7cb9a4310a78ac40d/":s)+a},
+if(s==null)s=null}return(s==null?"https://www.gstatic.com/flutter-canvaskit/83bacfc52569459a4a654727cad2546820cb0d6a/":s)+a},
 $S:67}
 A.Ho.prototype={
 bR(){B.c.W(this.a.a.save())},
@@ -83943,25 +83943,25 @@ q=q.a
 q===$&&A.b()
 q.au(s)
 r.au(new A.anG(r))},
-ad5(a){var s
-A.Xc().$1('"My Cool Game" is now ready. \ud83d\udc4d\ud83c\udffe')
+ad5(a){A.Xc().$1('"My Cool Game" is now ready. \ud83d\udc4d\ud83c\udffe')
 a.p2=!1
 a.tD()
-if(this.a.c.by($.qA(),t.yI)===B.ds)a.gjX().q(0,"start")
-s=this.a.c.by($.e2().ghl(),t.oe)
-$.e1()
-s.AN("background_music.mp3")}}
+if(this.a.c.by($.qA(),t.yI)===B.ds)a.gjX().q(0,"start")}}
 A.anK.prototype={
 $2(a,b){return new A.uz(new A.anJ(this.a,b),null)},
 $S:525}
 A.anJ.prototype={
-$0(){var s=this.b
-s.p2=!1
-s.tE()
-s.gjX().v(0,"start")
-s=this.a.a.c.by($.qA().ghl(),t.Z9).a
-s===$&&A.b()
-s.au(B.ih)},
+$0(){var s,r=this.b
+r.p2=!1
+r.tE()
+r.gjX().v(0,"start")
+r=this.a
+s=r.a.c.by($.e2().ghl(),t.oe)
+$.e1()
+s.AN("background_music.mp3")
+r=r.a.c.by($.qA().ghl(),t.Z9).a
+r===$&&A.b()
+r.au(B.ih)},
 $S:0}
 A.anL.prototype={
 $2(a,b){return new A.qT(new A.anI(b),null)},

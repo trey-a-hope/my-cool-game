@@ -144,6 +144,11 @@ class _MyCoolGameState extends State<MyCoolGame> {
                   game.resumeEngine();
                   game.overlays.remove(Overlays.start.name);
                   widget.ref
+                      .read(Providers.audioSettingsProvider.notifier)
+                      .initializeMusic(
+                        Globals.audio.backgroundMusic,
+                      );
+                  widget.ref
                       .read(Providers.gameProgressProvider.notifier)
                       .updateProgress(
                         GameProgress.start,
@@ -239,9 +244,5 @@ class _MyCoolGameState extends State<MyCoolGame> {
     if (widget.ref.read(Providers.gameProgressProvider) == GameProgress.menu) {
       i.overlays.add(Overlays.start.name);
     }
-
-    widget.ref.read(Providers.audioSettingsProvider.notifier).initializeMusic(
-          Globals.audio.backgroundMusic,
-        );
   }
 }

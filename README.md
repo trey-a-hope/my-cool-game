@@ -2,6 +2,8 @@
 
 A 2D RPG/Fantasy game built with Flutter and Flame engine, featuring pixel art graphics, combat mechanics, and immersive world design. This project follows the comprehensive development approach from "On Fire with Bonfire" game development course.
 
+Play the game on web [here](https://my-cool-game.onrender.com/).
+
 <img width="2240" alt="Screenshot 2025-01-01 at 11 14 05 AM" src="https://github.com/user-attachments/assets/51f4490f-3d87-466e-a5d3-93395a079cac" />
 
 ## 🎮 Features

@@ -27,7 +27,7 @@ class Bonfire extends GameDecoration with Sensor<DwarfWarrior> {
             position.y - _positionBuffer,
           ),
         ) {
-    setSensorInterval(500);
+    // setSensorInterval(500);
 
     setupLighting(
       LightingConfig(

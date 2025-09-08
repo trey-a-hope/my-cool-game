@@ -1,9 +1,11 @@
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
 import 'package:my_cool_game/presentation/my_cool_game.dart';
 import 'package:toastification/toastification.dart';
+import 'package:window_pain/window_pain.dart';
 
 final audios = [
   Globals.audio.backgroundMusic,
@@ -28,8 +30,26 @@ final audios = [
   Globals.audio.potion,
 ];
 
+late Logger logger;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  logger = Logger(
+    printer: PrefixPrinter(
+      PrettyPrinter(
+        methodCount: 0,
+        errorMethodCount: 8,
+        lineLength: 120,
+        colors: true,
+        printEmojis: true,
+        noBoxingByDefault: false,
+      ),
+    ),
+    output: null,
+  );
+
+  await WindowPain.maximizeWindow();
   await FlameAudio.audioCache.loadAll(audios);
   runApp(const MyApp());
 }

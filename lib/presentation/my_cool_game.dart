@@ -9,6 +9,7 @@ import 'package:my_cool_game/domain/core/enums/overlays.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
 import 'package:my_cool_game/domain/core/providers.dart';
 import 'package:my_cool_game/domain/entities/players/dwarf_warrior.dart';
+import 'package:my_cool_game/main.dart';
 import 'package:my_cool_game/presentation/backgrounds/parallax_background.dart';
 import 'package:my_cool_game/presentation/overlays/audio_settings_button_overlay.dart';
 import 'package:my_cool_game/presentation/overlays/audio_settings_overlay.dart';
@@ -237,7 +238,7 @@ class _MyCoolGameState extends State<MyCoolGame> {
   }
 
   void _onReady(BonfireGameInterface i) {
-    debugPrint('"My Cool Game" is now ready. 👍🏾');
+    logger.d('"My Cool Game" is now ready. 👍🏾');
 
     i.pauseEngine();
 

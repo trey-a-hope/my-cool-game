@@ -34,7 +34,6 @@ class ModalService {
           seconds: 3,
         ),
         showProgressBar: false,
-        closeButtonShowType: CloseButtonShowType.none,
       );
 
   static TextButton _confirmationAction(

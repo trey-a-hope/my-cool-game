@@ -3,16 +3,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:my_cool_game/domain/core/models/audio_settings.dart';
 
 class AudioSettingsNotifier extends riverpod.Notifier<AudioSettings> {
-  bool _isMusicInitialized = false;
+  // bool _isMusicInitialized = false;
 
   @override
   AudioSettings build() => AudioSettings();
 
   void initializeMusic(String musicFile) async {
-    if (!_isMusicInitialized) {
-      FlameAudio.bgm.play(musicFile);
-      _isMusicInitialized = true;
-    }
+    // TODO (Trey) - Create toggle for playing music
+    // if (!_isMusicInitialized) {
+    //   FlameAudio.bgm.play(musicFile);
+    //   _isMusicInitialized = true;
+    // }
 
     await FlameAudio.bgm.audioPlayer.setVolume(
       state.isMusicMuted ? 0.0 : state.musicVolume,

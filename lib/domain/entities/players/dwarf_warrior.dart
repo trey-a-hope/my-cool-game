@@ -25,7 +25,7 @@ import 'package:my_cool_game/presentation/animations/sprite_animations.dart';
 import 'package:toastification/toastification.dart';
 
 class DwarfWarrior extends PlatformPlayer
-    with HandleForces, ScreenBoundaryChecker, UseLifeBar {
+    with ScreenBoundaryChecker, UseLifeBar, HandleForces {
   static const _size = Globals.tileSize * 1.5;
 
   final WidgetRef ref;

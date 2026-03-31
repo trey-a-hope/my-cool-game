@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
 import 'package:my_cool_game/presentation/my_cool_game.dart';
+import 'package:my_cool_game/presentation/window_manager_util.dart';
 import 'package:toastification/toastification.dart';
-import 'package:window_pain/window_pain.dart';
 
 final audios = [
   Globals.audio.backgroundMusic,
@@ -49,7 +49,7 @@ void main() async {
     output: null,
   );
 
-  await WindowPain.maximizeWindow();
+  await WindowManagerUtil.init();
   await FlameAudio.audioCache.loadAll(audios);
   runApp(const MyApp());
 }

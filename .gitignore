@@ -43,6 +43,8 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Include only the web build directory.
-/build/*
-!/build/web/
+/macos/scripts/.env
+
+/env/prod.json
+
+build/

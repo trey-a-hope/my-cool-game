@@ -5,6 +5,7 @@ import 'package:logger/logger.dart';
 import 'package:my_cool_game/domain/core/globals.dart';
 import 'package:my_cool_game/presentation/my_cool_game.dart';
 import 'package:my_cool_game/presentation/window_manager_util.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:toastification/toastification.dart';
 
 final audios = [
@@ -31,9 +32,11 @@ final audios = [
 ];
 
 late Logger logger;
+late PackageInfo packageInfo;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  packageInfo = await PackageInfo.fromPlatform();
 
   logger = Logger(
     printer: PrefixPrinter(

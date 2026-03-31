@@ -1,6 +1,6 @@
 [
     {
         "language": "en-US",
-        "text": "Updated various package versions in `pubspec.lock` and `pubspec.yaml`, including `bonfire`, `logger`, and `toastification`."
+        "text": "Now displaying build and version number in audio settings panel"
     }
 ]

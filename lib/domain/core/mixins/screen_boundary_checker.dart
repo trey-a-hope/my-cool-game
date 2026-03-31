@@ -1,7 +1,7 @@
 import 'package:bonfire/bonfire.dart';
 
 mixin ScreenBoundaryChecker on GameComponent {
-  checkBoundaries() {
+  void checkBoundaries() {
     final mapSize = gameRef.map.size;
     final collisionBuffer = size.x / 2;
 

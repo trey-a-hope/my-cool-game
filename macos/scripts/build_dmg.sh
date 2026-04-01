@@ -29,6 +29,7 @@ security set-key-partition-list \
 security find-identity -v -p codesigning
 
 APP_NAME="My Cool Game"
+VOLUME_NAME="my_cool_game"
 IDENTITY="Developer ID Application: Tr3umphant.Designs, LLC (AYXEVPG9Z5)"
 APP_PATH=$(find "$PROJECT_DIR/build/macos/Build/Products/Release" -name "*.app" | head -1)
 DMG_PATH="$PROJECT_DIR/$APP_NAME.dmg"
@@ -45,7 +46,7 @@ rm -f "$DMG_PATH"
 
 # Create DMG using hdiutil instead of create-dmg
 hdiutil create \
-  -volname "$APP_NAME" \
+  -volname "$VOLUME_NAME" \
   -srcfolder "$APP_PATH" \
   -ov \
   -format UDZO \

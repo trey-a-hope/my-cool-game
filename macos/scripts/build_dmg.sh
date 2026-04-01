@@ -28,11 +28,13 @@ security set-key-partition-list \
 
 security find-identity -v -p codesigning
 
-APP_NAME="My Cool Game"
-VOLUME_NAME="my_cool_game"
+# If seeing "could not access /Volumes/My Cool Game/my_cool_game.app - Operation not permitted" error
+# Change the app_name; there's a stale volume referance.
+APP_NAME="My Cool Gamez"
+DMG_FILENAME="my_cool_game-26.3.3"
 IDENTITY="Developer ID Application: Tr3umphant.Designs, LLC (AYXEVPG9Z5)"
 APP_PATH=$(find "$PROJECT_DIR/build/macos/Build/Products/Release" -name "*.app" | head -1)
-DMG_PATH="$PROJECT_DIR/$APP_NAME.dmg"
+DMG_PATH="$PROJECT_DIR/$DMG_FILENAME.dmg"
 
 echo "APP_PATH: $APP_PATH"
 echo "DMG_PATH: $DMG_PATH"
@@ -46,7 +48,7 @@ rm -f "$DMG_PATH"
 
 # Create DMG using hdiutil instead of create-dmg
 hdiutil create \
-  -volname "$VOLUME_NAME" \
+  -volname "$APP_NAME" \
   -srcfolder "$APP_PATH" \
   -ov \
   -format UDZO \
@@ -63,6 +65,6 @@ xcrun stapler staple "$DMG_PATH"
 # Copy DMG to artifacts (codemagic only)
 if [ -n "$CM_BUILD_DIR" ]; then
   mkdir -p "$CM_EXPORT_DIR"
-  cp "$DMG_PATH" "$CM_EXPORT_DIR/$APP_NAME.dmg"
+  cp "$DMG_PATH" "$CM_EXPORT_DIR/$DMG_FILENAME.dmg"
 fi
 
